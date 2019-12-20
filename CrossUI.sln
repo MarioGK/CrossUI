@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrossUI", "CrossUI\CrossUI.csproj", "{155BDB88-96A3-4FE4-9206-A1BB1F2BF69E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrossUI.SDL2", "CrossUI.SDL2\CrossUI.SDL2.csproj", "{EC07BC12-4437-461D-B977-B54613DB3CDD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{155BDB88-96A3-4FE4-9206-A1BB1F2BF69E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{155BDB88-96A3-4FE4-9206-A1BB1F2BF69E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{155BDB88-96A3-4FE4-9206-A1BB1F2BF69E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{155BDB88-96A3-4FE4-9206-A1BB1F2BF69E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EC07BC12-4437-461D-B977-B54613DB3CDD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EC07BC12-4437-461D-B977-B54613DB3CDD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EC07BC12-4437-461D-B977-B54613DB3CDD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EC07BC12-4437-461D-B977-B54613DB3CDD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
