@@ -16,7 +16,7 @@ namespace CrossUI.SDL2
         {
             lock (Lock)
             {
-                _eventsByWindowID.Add(window.WindowID, window);
+                _eventsByWindowID.Add(window.WindowId, window);
                 if (!_firstInit)
                 {
                     _firstInit = true;
@@ -29,7 +29,7 @@ namespace CrossUI.SDL2
         {
             lock (Lock)
             {
-                _eventsByWindowID.Remove(window.WindowID);
+                _eventsByWindowID.Remove(window.WindowId);
             }
         }
 

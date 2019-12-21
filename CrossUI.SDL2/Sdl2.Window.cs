@@ -11,12 +11,12 @@ namespace CrossUI.SDL2
         /// <summary>
         /// A special sentinel value indicating that a newly-created window should be centered in the screen.
         /// </summary>
-        public const int SDL_WINDOWPOS_CENTERED = 0x2FFF0000;
+        public const int WINDOWPOS_CENTERED = 0x2FFF0000;
 
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        private delegate SDL_Window SDL_CreateWindow_t(string title, int x, int y, int w, int h, SDL_WindowFlags flags);
+        private delegate SDL_Window SDL_CreateWindow_t(string title, int x, int y, int w, int h, SDLWindowFlags flags);
         private static SDL_CreateWindow_t s_sdl_createWindow = LoadFunction<SDL_CreateWindow_t>("SDL_CreateWindow");
-        public static SDL_Window SDL_CreateWindow(string title, int x, int y, int w, int h, SDL_WindowFlags flags) => s_sdl_createWindow(title, x, y, w, h, flags);
+        public static SDL_Window SDL_CreateWindow(string title, int x, int y, int w, int h, SDLWindowFlags flags) => s_sdl_createWindow(title, x, y, w, h, flags);
 
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
         private delegate SDL_Window SDL_CreateWindowFrom_t(IntPtr data);
@@ -59,9 +59,9 @@ namespace CrossUI.SDL2
         public static void SDL_SetWindowTitle(SDL_Window Sdl2Window, string title) => s_setWindowTitle(Sdl2Window, title);
 
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        private delegate SDL_WindowFlags SDL_GetWindowFlags_t(SDL_Window SDL2Window);
+        private delegate SDLWindowFlags SDL_GetWindowFlags_t(SDL_Window SDL2Window);
         private static SDL_GetWindowFlags_t s_getWindowFlags = LoadFunction<SDL_GetWindowFlags_t>("SDL_GetWindowFlags");
-        public static SDL_WindowFlags SDL_GetWindowFlags(SDL_Window Sdl2Window) => s_getWindowFlags(Sdl2Window);
+        public static SDLWindowFlags SDL_GetWindowFlags(SDL_Window Sdl2Window) => s_getWindowFlags(Sdl2Window);
 
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
         private delegate void SDL_SetWindowBordered_t(SDL_Window SDL2Window, uint bordered);

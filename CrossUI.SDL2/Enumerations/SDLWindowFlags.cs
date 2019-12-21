@@ -3,7 +3,7 @@
 namespace CrossUI.SDL2.Enumerations
 {
     [Flags]
-    public enum SDL_WindowFlags : uint
+    public enum SDLWindowFlags : uint
     {
         /// <summary>
         /// fullscreen Sdl2Window.

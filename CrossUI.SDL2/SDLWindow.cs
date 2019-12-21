@@ -19,7 +19,7 @@ namespace CrossUI.SDL2
     {
         private readonly List<SDL_Event> _events = new List<SDL_Event>();
         private IntPtr _window;
-        internal uint WindowID { get; private set; }
+        internal uint WindowId { get; private set; }
         private bool _exists;
 
         private SimpleInputSnapshot _publicSnapshot = new SimpleInputSnapshot();
@@ -47,7 +47,7 @@ namespace CrossUI.SDL2
         private bool _firstMouseEvent = true;
         private Func<bool> _closeRequestedHandler;
 
-        public SDLWindow(string title, int x, int y, int width, int height, SDL_WindowFlags flags, bool threadedProcessing)
+        public SDLWindow(string title, int x, int y, int width, int height, SDLWindowFlags flags, bool threadedProcessing = false)
         {
             _threadedProcessing = threadedProcessing;
             if (threadedProcessing)
@@ -72,7 +72,7 @@ namespace CrossUI.SDL2
             else
             {
                 _window = SDL_CreateWindow(title, x, y, width, height, flags);
-                WindowID = SDL_GetWindowID(_window);
+                WindowId = SDL_GetWindowID(_window);
                 Sdl2WindowRegistry.RegisterWindow(this);
                 PostWindowCreated(flags);
             }
@@ -99,7 +99,7 @@ namespace CrossUI.SDL2
             else
             {
                 _window = SDL_CreateWindowFrom(windowHandle);
-                WindowID = SDL_GetWindowID(_window);
+                WindowId = SDL_GetWindowID(_window);
                 Sdl2WindowRegistry.RegisterWindow(this);
                 PostWindowCreated(0);
             }
@@ -126,25 +126,25 @@ namespace CrossUI.SDL2
             get
             {
                 var flags = SDL_GetWindowFlags(_window);
-                if (((flags & SDL_WindowFlags.FullScreenDesktop) == SDL_WindowFlags.FullScreenDesktop)
-                    || ((flags & (SDL_WindowFlags.Borderless | SDL_WindowFlags.Fullscreen)) == (SDL_WindowFlags.Borderless | SDL_WindowFlags.Fullscreen)))
+                if (((flags & SDLWindowFlags.FullScreenDesktop) == SDLWindowFlags.FullScreenDesktop)
+                    || ((flags & (SDLWindowFlags.Borderless | SDLWindowFlags.Fullscreen)) == (SDLWindowFlags.Borderless | SDLWindowFlags.Fullscreen)))
                 {
                     return WindowState.BorderlessFullScreen;
                 }
 
-                if ((flags & SDL_WindowFlags.Minimized) == SDL_WindowFlags.Minimized)
+                if ((flags & SDLWindowFlags.Minimized) == SDLWindowFlags.Minimized)
                 {
                     return WindowState.Minimized;
                 }
-                if ((flags & SDL_WindowFlags.Fullscreen) == SDL_WindowFlags.Fullscreen)
+                if ((flags & SDLWindowFlags.Fullscreen) == SDLWindowFlags.Fullscreen)
                 {
                     return WindowState.FullScreen;
                 }
-                if ((flags & SDL_WindowFlags.Maximized) == SDL_WindowFlags.Maximized)
+                if ((flags & SDLWindowFlags.Maximized) == SDLWindowFlags.Maximized)
                 {
                     return WindowState.Maximized;
                 }
-                if ((flags & SDL_WindowFlags.Hidden) == SDL_WindowFlags.Hidden)
+                if ((flags & SDLWindowFlags.Hidden) == SDLWindowFlags.Hidden)
                 {
                     return WindowState.Hidden;
                 }
@@ -183,7 +183,7 @@ namespace CrossUI.SDL2
 
         public bool Visible
         {
-            get => (SDL_GetWindowFlags(_window) & SDL_WindowFlags.Shown) != 0;
+            get => (SDL_GetWindowFlags(_window) & SDLWindowFlags.Shown) != 0;
             set
             {
                 if (value)
@@ -203,10 +203,7 @@ namespace CrossUI.SDL2
 
         public bool CursorVisible
         {
-            get
-            {
-                return SDL_ShowCursor(SDL_QUERY) == 1;
-            }
+            get => SDL_ShowCursor(SDL_QUERY) == 1;
             set
             {
                 var toggle = value ? SDL_ENABLE : SDL_DISABLE;
@@ -231,17 +228,17 @@ namespace CrossUI.SDL2
             }
         }
 
-        public bool Focused => (SDL_GetWindowFlags(_window) & SDL_WindowFlags.InputFocus) != 0;
+        public bool Focused => (SDL_GetWindowFlags(_window) & SDLWindowFlags.InputFocus) != 0;
 
         public bool Resizable
         {
-            get => (SDL_GetWindowFlags(_window) & SDL_WindowFlags.Resizable) != 0;
+            get => (SDL_GetWindowFlags(_window) & SDLWindowFlags.Resizable) != 0;
             set => SDL_SetWindowResizable(_window, value ? 1u : 0u);
         }
 
         public bool BorderVisible
         {
-            get => (SDL_GetWindowFlags(_window) & SDL_WindowFlags.Borderless) == 0;
+            get => (SDL_GetWindowFlags(_window) & SDLWindowFlags.Borderless) == 0;
             set => SDL_SetWindowBordered(_window, value ? 1u : 0u);
         }
 
@@ -323,7 +320,7 @@ namespace CrossUI.SDL2
         {
             var wp = (WindowParams)state;
             _window = wp.Create();
-            WindowID = SDL_GetWindowID(_window);
+            WindowId = SDL_GetWindowID(_window);
             Sdl2WindowRegistry.RegisterWindow(this);
             PostWindowCreated(wp.WindowFlags);
             wp.ResetEvent.Set();
@@ -353,11 +350,11 @@ namespace CrossUI.SDL2
             }
         }
 
-        private void PostWindowCreated(SDL_WindowFlags flags)
+        private void PostWindowCreated(SDLWindowFlags flags)
         {
             RefreshCachedPosition();
             RefreshCachedSize();
-            if ((flags & SDL_WindowFlags.Shown) == SDL_WindowFlags.Shown)
+            if ((flags & SDLWindowFlags.Shown) == SDLWindowFlags.Shown)
             {
                 SDL_ShowWindow(_window);
             }
@@ -395,9 +392,9 @@ namespace CrossUI.SDL2
             CheckNewWindowTitle();
 
             Sdl2Events.ProcessEvents();
-            for (var i = 0; i < _events.Count; i++)
+            foreach (var t in _events)
             {
-                var ev = _events[i];
+                var ev = t;
                 if (eventHandler == null)
                 {
                     HandleEvent(&ev);
@@ -1023,7 +1020,7 @@ namespace CrossUI.SDL2
             public int Width { get; set; }
             public int Height { get; set; }
             public string Title { get; set; }
-            public SDL_WindowFlags WindowFlags { get; set; }
+            public SDLWindowFlags WindowFlags { get; set; }
 
             public IntPtr WindowHandle { get; set; }
 
