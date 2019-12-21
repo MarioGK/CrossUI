@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Diagnostics;
+using CrossUI.SDL2.Helpers;
 
-namespace CrossUI.SDL2
+namespace CrossUI.SDL2.Objects
 {
     [DebuggerDisplay("{DebuggerDisplayString,nq}")]
     public struct Point : IEquatable<Point>

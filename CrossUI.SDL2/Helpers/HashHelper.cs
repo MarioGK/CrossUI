@@ -1,4 +1,4 @@
-﻿namespace CrossUI.SDL2
+﻿namespace CrossUI.SDL2.Helpers
 {
     internal static class HashHelper
     {

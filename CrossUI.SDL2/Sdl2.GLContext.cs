@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Runtime.InteropServices;
+using CrossUI.SDL2.Enumerations;
+using CrossUI.SDL2.Objects;
+using CrossUI.SDL2.Structs;
 
 namespace CrossUI.SDL2
 {
@@ -56,49 +59,5 @@ namespace CrossUI.SDL2
         private delegate void SDL_GL_DeleteContext_t(IntPtr context);
         private static SDL_GL_DeleteContext_t s_gl_deleteContext = LoadFunction<SDL_GL_DeleteContext_t>("SDL_GL_DeleteContext");
         public static void SDL_GL_DeleteContext(IntPtr context) => s_gl_deleteContext(context);
-    }
-
-    public enum SDL_GLAttribute
-    {
-        RedSize,
-        GreenSize,
-        BlueSize,
-        AlphaSize,
-        BufferSize,
-        DoubleBuffer,
-        DepthSize,
-        StencilSize,
-        AccumulationRedSize,
-        AccumulationGreenSize,
-        AccumulationBlueSize,
-        AccumulationAlphaSize,
-        GLStereo,
-        MultisampleBuffers,
-        MultisampleSamples,
-        AcceleratedVisual,
-        RetainedBacking,
-        ContextMajorVersion,
-        ContextMinorVersion,
-        ContextEgl,
-        ContextFlags,
-        ContextProfileMask,
-        ShareWithCurrentContext,
-        FramebufferSrgbCapable,
-        ContextReleaseBehavior
-    }
-
-    public enum SDL_GLContextFlag
-    {
-        Debug = 0x0001,
-        ForwardCompatible = 0x0002,
-        RobustAccess = 0x0004,
-        ResetIsolatio = 0x0008,
-    }
-
-    public enum SDL_GLProfile
-    {
-        Core = 0x0001,
-        Compatibility = 0x0002,
-        ES = 0x0004
     }
 }

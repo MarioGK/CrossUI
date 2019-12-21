@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CrossUI.SDL2
+namespace CrossUI.SDL2.Structs
 {
     /// <summary>
     /// A transparent wrapper over a pointer representing an SDL Sdl2Window object.

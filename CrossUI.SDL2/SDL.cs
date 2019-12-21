@@ -1,143 +1,9 @@
-﻿using System;
-using System.Runtime.InteropServices;
+﻿using System.Runtime.InteropServices;
+using CrossUI.SDL2.Enumerations;
+using CrossUI.SDL2.Structs;
 
 namespace CrossUI.SDL2
 {
-    /// <summary>
-    /// A transparent wrapper over a pointer to a native SDL_GameController.
-    /// </summary>
-    public struct SDL_GameController
-    {
-        /// <summary>
-        /// The native SDL_GameController pointer.
-        /// </summary>
-        public readonly IntPtr NativePointer;
-
-        public SDL_GameController(IntPtr pointer)
-        {
-            NativePointer = pointer;
-        }
-
-        public static implicit operator IntPtr(SDL_GameController controller) => controller.NativePointer;
-        public static implicit operator SDL_GameController(IntPtr pointer) => new SDL_GameController(pointer);
-    }
-
-    [StructLayout(LayoutKind.Sequential)]
-    public struct SDL_ControllerAxisEvent
-    {
-        /// <summary>
-        /// SDL_CONTROLLERAXISMOTION.
-        /// </summary>
-        public uint type;
-        /// <summary>
-        /// In milliseconds, populated using SDL_GetTicks().
-        /// </summary>
-        public uint timestamp;
-        /// <summary>
-        /// The joystick instance id.
-        /// </summary>
-        public int which;
-        /// <summary>
-        /// The controller axis.
-        /// </summary>
-        public SDL_GameControllerAxis axis;
-        private byte padding1;
-        private byte padding2;
-        private byte padding3;
-        /// <summary>
-        /// The axis value (range: -32768 to 32767)
-        /// </summary>
-        public short value;
-        private ushort padding4;
-    }
-
-    [StructLayout(LayoutKind.Sequential)]
-    public struct SDL_ControllerButtonEvent
-    {
-        /// <summary>
-        /// SDL_CONTROLLERBUTTONDOWN or SDL_CONTROLLERBUTTONUP.
-        /// </summary>
-        public uint type;
-        /// <summary>
-        /// In milliseconds, populated using SDL_GetTicks().
-        /// </summary>
-        public uint timestamp;
-        /// <summary>
-        /// The joystick instance id.
-        /// </summary>
-        public int which;
-        /// <summary>
-        /// The controller button
-        /// </summary>
-        public SDL_GameControllerButton button;
-        /// <summary>
-        /// SDL_PRESSED or SDL_RELEASED
-        /// </summary>
-        public byte state;
-        private byte padding1;
-        private byte padding2;
-    }
-
-    [StructLayout(LayoutKind.Sequential)]
-    struct SDL_ControllerDeviceEvent
-    {
-        /// <summary>
-        /// SDL_CONTROLLERDEVICEADDED, SDL_CONTROLLERDEVICEREMOVED, or SDL_CONTROLLERDEVICEREMAPPED.
-        /// </summary>
-        public uint type;
-        /// <summary>
-        /// In milliseconds, populated using SDL_GetTicks().
-        /// </summary>
-        public uint timestamp;
-        /// <summary>
-        /// The joystick device index for the ADDED event, instance id for the REMOVED or REMAPPED event.
-        /// </summary>
-        public int which;
-    }
-
-    /// <summary>
-    /// The list of axes available from a controller.
-    /// Thumbstick axis values range from SDL_Joystick_AXIS_MIN to SDL_Joystick_AXIS_MAX,
-    /// and are centered within ~8000 of zero, though advanced UI will allow users to set
-    /// or autodetect the dead zone, which varies between controllers.
-    /// Trigger axis values range from 0 to SDL_Joystick_AXIS_MAX.
-    /// </summary>
-    public enum SDL_GameControllerAxis : byte
-    {
-        Invalid = unchecked((byte)-1),
-        LeftX = 0,
-        LeftY,
-        RightX,
-        RightY,
-        TriggerLeft,
-        TriggerRight,
-        Max,
-    }
-
-    /// <summary>
-    /// The list of buttons available from a controller.
-    /// </summary>
-    public enum SDL_GameControllerButton : byte
-    {
-        Invalid = unchecked((byte)-1),
-        A = 0,
-        B,
-        X,
-        Y,
-        Back,
-        Guide,
-        Start,
-        LeftStick,
-        RightStick,
-        LeftShoulder,
-        RightShoulder,
-        DPadUp,
-        DPadDown,
-        DPadLeft,
-        DPadRight,
-        Max
-    }
-
     public static unsafe partial class SDL
     {
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
@@ -277,5 +143,7 @@ namespace CrossUI.SDL2
         /// The button indices start at index 0.
         /// </summary>
         public static byte SDL_GameControllerGetButton(SDL_GameController gamecontroller, SDL_GameControllerButton button) => s_sdl_gameControllerGetButton(gamecontroller, button);
+        
+            
     }
 }

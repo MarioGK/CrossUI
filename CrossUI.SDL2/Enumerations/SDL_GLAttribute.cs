@@ -1,0 +1,31 @@
+﻿namespace CrossUI.SDL2.Enumerations
+{
+    public enum SDL_GLAttribute
+    {
+        RedSize,
+        GreenSize,
+        BlueSize,
+        AlphaSize,
+        BufferSize,
+        DoubleBuffer,
+        DepthSize,
+        StencilSize,
+        AccumulationRedSize,
+        AccumulationGreenSize,
+        AccumulationBlueSize,
+        AccumulationAlphaSize,
+        GLStereo,
+        MultisampleBuffers,
+        MultisampleSamples,
+        AcceleratedVisual,
+        RetainedBacking,
+        ContextMajorVersion,
+        ContextMinorVersion,
+        ContextEgl,
+        ContextFlags,
+        ContextProfileMask,
+        ShareWithCurrentContext,
+        FramebufferSrgbCapable,
+        ContextReleaseBehavior
+    }
+}

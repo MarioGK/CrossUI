@@ -1,4 +1,6 @@
 ﻿using System.Runtime.InteropServices;
+using CrossUI.SDL2.Objects;
+using CrossUI.SDL2.Structs;
 
 namespace CrossUI.SDL2
 {

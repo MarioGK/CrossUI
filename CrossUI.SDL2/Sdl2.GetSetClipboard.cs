@@ -1,5 +1,6 @@
 ﻿using System.Runtime.InteropServices;
 using System.Text;
+using CrossUI.SDL2.Helpers;
 
 namespace CrossUI.SDL2
 {

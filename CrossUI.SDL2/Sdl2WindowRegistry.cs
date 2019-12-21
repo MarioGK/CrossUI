@@ -1,16 +1,18 @@
 ﻿using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using CrossUI.SDL2.Enumerations;
+using CrossUI.SDL2.Structs;
 
 namespace CrossUI.SDL2
 {
     internal static class Sdl2WindowRegistry
     {
         public static readonly object Lock = new object();
-        private static readonly Dictionary<uint, Sdl2Window> _eventsByWindowID
-            = new Dictionary<uint, Sdl2Window>();
+        private static readonly Dictionary<uint, SDLWindow> _eventsByWindowID
+            = new Dictionary<uint, SDLWindow>();
         private static bool _firstInit;
 
-        public static void RegisterWindow(Sdl2Window window)
+        public static void RegisterWindow(SDLWindow window)
         {
             lock (Lock)
             {
@@ -23,7 +25,7 @@ namespace CrossUI.SDL2
             }
         }
 
-        public static void RemoveWindow(Sdl2Window window)
+        public static void RemoveWindow(SDLWindow window)
         {
             lock (Lock)
             {

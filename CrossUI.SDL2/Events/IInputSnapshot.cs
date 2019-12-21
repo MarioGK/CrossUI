@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Numerics;
+using CrossUI.SDL2.Enumerations;
 
-namespace CrossUI.SDL2
+namespace CrossUI.SDL2.Events
 {
-    public interface InputSnapshot
+    public interface IInputSnapshot
     {
         IReadOnlyList<KeyEvent> KeyEvents { get; }
         IReadOnlyList<MouseEvent> MouseEvents { get; }

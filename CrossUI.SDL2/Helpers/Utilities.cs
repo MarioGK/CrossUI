@@ -1,6 +1,6 @@
 ﻿using System.Text;
 
-namespace CrossUI.SDL2
+namespace CrossUI.SDL2.Helpers
 {
     internal static class Utilities
     {

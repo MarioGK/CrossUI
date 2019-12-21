@@ -1,9 +1,12 @@
 using System.Collections.Generic;
+using CrossUI.SDL2.Structs;
 
 namespace CrossUI.SDL2
 {
     public static class Sdl2Events
     {
+        public delegate void SDLEventHandler(ref SDL_Event ev);
+        
         private static readonly object s_lock = new object();
         private static readonly List<SDLEventHandler> s_processors = new List<SDLEventHandler>();
         public static void Subscribe(SDLEventHandler processor)

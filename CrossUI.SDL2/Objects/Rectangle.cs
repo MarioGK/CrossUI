@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Numerics;
+using CrossUI.SDL2.Helpers;
 
-namespace CrossUI.SDL2
+namespace CrossUI.SDL2.Objects
 {
     public struct Rectangle : IEquatable<Rectangle>
     {

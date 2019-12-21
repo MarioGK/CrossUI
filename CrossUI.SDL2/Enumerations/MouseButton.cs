@@ -1,17 +1,5 @@
-﻿namespace CrossUI.SDL2
+﻿namespace CrossUI.SDL2.Enumerations
 {
-    public struct MouseEvent
-    {
-        public MouseButton MouseButton { get; }
-        public bool Down { get; }
-
-        public MouseEvent(MouseButton button, bool down)
-        {
-            MouseButton = button;
-            Down = down;
-        }
-    }
-
     public enum MouseButton
     {
         //
