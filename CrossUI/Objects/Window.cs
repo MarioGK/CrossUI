@@ -1,39 +1,84 @@
-﻿using CrossUI.SDL2;
-using CrossUI.SDL2.Enumerations;
-using CrossUI.SDL2.Structs;
+﻿using System;
+using CrossUI.SDL2.Wrapper;
+using SDL2;
+using static SDL2.SDL;
 
 namespace CrossUI.Objects
 {
     public class Window
     {
-        public readonly SDLWindow sdlWindow;
-        private readonly SDL_Window nativeWindow;
-        private readonly SDL_Renderer renderer;
-        
+        private readonly IntPtr windowPtr;
+        private readonly IntPtr rendererPtr;
+        public readonly Renderer Renderer;
+
+        public delegate void DrawDelegate(Renderer renderer);
+
+        public delegate void QuitDelegate(Window window);
+
+        public event DrawDelegate OnDraw;
+        public event QuitDelegate OnQuit;
+
+        public Color BackgroundColor { get; set; } = new Color(255,255,255);
+
+        public bool Running { get; private set; }
+
         public Window()
         {
-            SDL.Init(SDLInitFlags.Video);
+            Running = true;
+            SDL_Init(SDL.SDL_INIT_VIDEO);
+
+            windowPtr = SDL_CreateWindow("Test", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 1280, 768,
+                SDL_WindowFlags.SDL_WINDOW_RESIZABLE);
+            rendererPtr = SDL_CreateRenderer(windowPtr, -1, SDL_RendererFlags.SDL_RENDERER_ACCELERATED);
             
-            sdlWindow = new SDLWindow("Test", SDL.WINDOWPOS_CENTERED, SDL.WINDOWPOS_CENTERED, 1280,768, SDLWindowFlags.Resizable);
-            nativeWindow = new SDL_Window(sdlWindow.SdlWindowHandle);
+            SDL_Setg
             
-            renderer = SDL.CreateRenderer(nativeWindow, -1, SDLRendererFlags.SDLRendererSoftware);
+            Renderer = new Renderer(rendererPtr);
+        }
+
+        public void Draw()
+        {
+            Renderer.Clear();
+            
+            OnDraw?.Invoke(Renderer);
+
+            var rect = new SDL_Rect {x = 100, y = 100, h = 250, w = 100};
+            var rect1 = new SDL_Rect {x = 250, y = 200, h = 250, w = 100};
+            SDL_SetRenderDrawColor(rendererPtr, 255, 0, 0, 255);
+            
+            SDL_RenderDrawRect(rendererPtr, ref rect);
+            SDL_RenderFillRect(rendererPtr, ref rect1);
+            
+            Renderer.SetRenderDrawColor(BackgroundColor);
+            Renderer.Render();
+        }
+
+        private void Update()
+        {
+
+        }
+
+        private void HandleEvents()
+        {
+            while (SDL_PollEvent(out var e) != 0)
+            {
+                switch (e.type)
+                {
+                    case SDL_EventType.SDL_QUIT:
+                        OnQuit?.Invoke(this);
+                        Running = false;
+                        break;
+                }
+            }
         }
 
         public void Run()
         {
-            while (sdlWindow.Exists)
+            while (Running)
             {
-                sdlWindow.PumpEvents();
-                SDL.SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
-                SDL.RenderClear(renderer);
-
-                SDL.SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
-                SDL.RenderDrawLine(renderer,320, 200, 300, 240);
-                SDL.RenderDrawLine(renderer,300, 240, 340, 240);
-                SDL.RenderDrawLine(renderer,340, 240, 320, 200);
-            
-                SDL.RenderPresent(renderer);
+                HandleEvents();
+                Update();
+                Draw();
             }
         }
     }
