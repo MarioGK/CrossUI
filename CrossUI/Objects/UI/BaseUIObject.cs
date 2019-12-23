@@ -1,4 +1,6 @@
-﻿using SDL2;
+﻿
+
+using SFML.Graphics;
 
 namespace CrossUI.Objects.UI
 {
@@ -7,16 +9,17 @@ namespace CrossUI.Objects.UI
         public BaseUIObject(string id)
         {
             ID = id;
+            DrawableObject = new 
         }
         public string ID { get; set; }
-
-        public SDL.SDL_Rect Rectangle { get; set; }
 
         public delegate void ClickDelegate();
         public delegate void HoverDelegate();
 
         public event ClickDelegate OnClick;
         public event ClickDelegate OnHover;
+
+        internal Drawable DrawableObject { get; set; }
 
         protected void TriggerOnClick()
         {

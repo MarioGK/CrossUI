@@ -1,4 +1,5 @@
-﻿using SDL2;
+﻿
+using SFML.Graphics;
 
 namespace CrossUI.Objects.UI
 {
@@ -9,7 +10,7 @@ namespace CrossUI.Objects.UI
         public Color Background { get; set; }
         public Color Foreground { get; set; }
         
-        public Button(string id, SDL.SDL_Rect rect) : base(id)
+        public Button(string id, RectangleShape rect) : base(id)
         {
             Background = new Color(255,0,0);
             Foreground = new Color(0,0,0);
