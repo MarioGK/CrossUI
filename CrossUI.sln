@@ -4,8 +4,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrossUI.TestSample", "Cross
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrossUI", "CrossUI\CrossUI.csproj", "{F4C44DA0-0298-4408-8E62-E6E667382B4D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrossUI.Utilities.NativeFunctionGen", "CrossUI.Utilities.NativeFunctionGen\CrossUI.Utilities.NativeFunctionGen.csproj", "{BAD6D9C6-DDBD-4D68-BBE8-01F369E83CF6}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -20,9 +18,5 @@ Global
 		{F4C44DA0-0298-4408-8E62-E6E667382B4D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F4C44DA0-0298-4408-8E62-E6E667382B4D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F4C44DA0-0298-4408-8E62-E6E667382B4D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{BAD6D9C6-DDBD-4D68-BBE8-01F369E83CF6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BAD6D9C6-DDBD-4D68-BBE8-01F369E83CF6}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BAD6D9C6-DDBD-4D68-BBE8-01F369E83CF6}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BAD6D9C6-DDBD-4D68-BBE8-01F369E83CF6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
