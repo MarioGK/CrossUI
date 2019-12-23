@@ -7,7 +7,7 @@ namespace CrossUI.TestSample
          private static Window window;
          private static void Main(string[] args)
          {
-             window = new Window();
+             window = new Window("MainWindow");
 
              window.Run();
          }
