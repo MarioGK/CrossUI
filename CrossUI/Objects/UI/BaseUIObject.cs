@@ -10,7 +10,6 @@ namespace CrossUI.Objects.UI
     {
         public BaseUIObject(string id, Vector2f position) : base(id)
         {
-            NeedsUpdate = true;
             ID = id;
             Position = position;
             //DrawableObject = new RenderTexture(100,100);
@@ -25,9 +24,7 @@ namespace CrossUI.Objects.UI
 
         public event ClickDelegate OnClick;
         public event HoverDelegate OnHover;
-
-        public bool NeedsUpdate { get; set; }
-
+        
         public FloatRect Rect { get; protected set; }
 
         internal void TriggerOnClick()
@@ -46,7 +43,7 @@ namespace CrossUI.Objects.UI
         }
 
         internal abstract void Draw(RenderWindow window);
-        internal abstract void Update();
+        protected abstract void Update();
 
         public bool IsInside(float x, float y)
         {

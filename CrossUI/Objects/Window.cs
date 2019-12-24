@@ -13,7 +13,7 @@ namespace CrossUI.Objects
     {
         private RenderWindow window;
 
-        public delegate void DrawDelegate(Window renderer);
+        public delegate void DrawDelegate(RenderWindow renderer);
 
         public delegate void QuitDelegate(Window window);
 
@@ -24,20 +24,30 @@ namespace CrossUI.Objects
 
         public Text FPSText { get; set; }
 
-        public Dictionary<string, BaseUIObject> Children { get; set; } = new Dictionary<string, BaseUIObject>();
+        internal Dictionary<string, BaseUIObject> ChildrenDictionary { get; set; } = new Dictionary<string, BaseUIObject>();
+
+        public IEnumerable<BaseUIObject> Children => ChildrenDictionary.Values;
 
         public void AddChild(BaseUIObject obj)
         {
             obj.Parent = this;
+            ChildrenDictionary.Add(obj.ID, obj);
+        }
+
+        public void RemoveChild(string id)
+        {
+            ChildrenDictionary.Remove(id);
         }
 
         public Window(string id) : base(id)
         {
             FontManager.Initialize();
             
-            window = new RenderWindow(new VideoMode(800, 600), id);
+            var settings = new ContextSettings{ AntialiasingLevel = 4};
+            
+            window = new RenderWindow(new VideoMode(800, 600), id, Styles.Default, settings);
             window.SetFramerateLimit(60);
-            window.Closed += (_, __) => window.Close();
+            window.Closed += WindowOnClosed;
             
             window.MouseMoved += WindowOnMouseMoved;
             
@@ -46,12 +56,18 @@ namespace CrossUI.Objects
                 FillColor = new Color(255,0,0), CharacterSize = 24,DisplayedString = "00"
             };
             
-            Children.Add(button.ID, button);
+            AddChild(button);
+        }
+
+        private void WindowOnClosed(object sender, EventArgs e)
+        {
+            OnQuit?.Invoke(this);
+            window.Close();
         }
 
         private void WindowOnMouseMoved(object sender, MouseMoveEventArgs e)
         {
-            foreach (var obj in Children.Values)
+            foreach (var obj in Children)
             {
                 obj.TriggerOnHover(obj.IsInside(e.X,e.Y));
             }
@@ -71,28 +87,21 @@ namespace CrossUI.Objects
             FPSText.DisplayedString = (1f / DeltaTime).ToString("00");
             window.Draw(FPSText);
 
-            foreach (var obj in Children.Values)
+            foreach (var obj in Children)
             {
                 obj.Draw(window);
             }
             
+            OnDraw?.Invoke(window);
+            
             window.Display();
         }
 
-        private void Update()
-        {
-            foreach (var obj in Children.Values.Where(x => x.NeedsUpdate))
-            {
-                obj.Update();
-            }
-        }
-        
         public void Run()
         {
             while (window.IsOpen)
             {
                 window.DispatchEvents();
-                Update();
                 Draw();
             }
         }

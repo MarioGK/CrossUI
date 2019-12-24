@@ -1,4 +1,5 @@
 ﻿
+using CrossUI.Managers;
 using SFML.Graphics;
 using SFML.System;
 
@@ -6,39 +7,61 @@ namespace CrossUI.Objects.UI
 {
     public class Button : BaseUIObject
     {
-        private static readonly Font font = new Font("segoeui.ttf");
-        public string Text { get; set; }
+        public string Text
+        {
+            get => text;
+            set
+            {
+                text = value;
+                Update();
+            }
+        }
 
-        public Color BackgroundColor { get; set; }
-        public Color Foreground { get; set; }
+        public Color BackgroundColor
+        {
+            get => backgroundColor;
+            set
+            {
+                backgroundColor = value;
+                Update();
+            }
+        }
+
+        public Color Foreground
+        {
+            get => foreground;
+            set
+            {
+                foreground = value;
+                Update();
+            }
+        }
 
         public Button(string id, Vector2f pos) : base(id, pos)
         {
-            Text = "I am a button";
+            text = "I am a button";
             BackgroundColor = new Color(255, 0, 0);
-            Foreground = new Color(0, 0, 0);
+            foreground = new Color(0, 0, 0);
 
-            DisplayText = new Text(Text, font) {FillColor = Foreground, Position = Position};
+            DisplayText = new Text(Text, FontManager.Font) {FillColor = Foreground, Position = Position};
             BackgroundRectangle = new RectangleShape(new Vector2f(200,200)) {FillColor = BackgroundColor, Position = Position};
 
             OnHover += OnOnHover;
+            
+            Update();
         }
 
         private void OnOnHover(bool inside)
         {
-            if (inside)
-            {
-                BackgroundRectangle.FillColor = Color.Blue;
-            }
-            else
-            {
-                BackgroundRectangle.FillColor = BackgroundColor;
-            }
+            BackgroundRectangle.FillColor = inside ? Color.Blue : BackgroundColor;
             //BackgroundColor = Color.Blue;
         }
 
         public Text DisplayText;
         public RectangleShape BackgroundRectangle;
+        private Color foreground;
+        private string text;
+        private Color backgroundColor;
 
         internal override void Draw(RenderWindow window)
         {
@@ -46,12 +69,11 @@ namespace CrossUI.Objects.UI
             window.Draw(DisplayText);
         }
 
-        internal override void Update()
+        protected sealed override void Update()
         {
             var textSize = DisplayText.GetLocalBounds();
             BackgroundRectangle.Size = new Vector2f(textSize.Width + 5f, textSize.Height *2f);
             Rect = BackgroundRectangle.GetGlobalBounds();
-            NeedsUpdate = false;
         }
     }
 }
