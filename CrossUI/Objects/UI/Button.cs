@@ -40,7 +40,7 @@ namespace CrossUI.Objects.UI
         public Button(string id, Vector2f pos) : base(id, pos)
         {
             text = "I am a button";
-            BackgroundColor = new Color(255, 0, 0);
+            backgroundColor = new Color(255, 0, 0);
             foreground = new Color(0, 0, 0);
 
             DisplayText = new Text(Text, FontManager.Font) {FillColor = Foreground, Position = Position};

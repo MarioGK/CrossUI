@@ -34,12 +34,9 @@ namespace CrossUI.Objects.UI
         
         internal void TriggerOnHover(bool value)
         {
-            if (value != Hovering)
-            {
-                Hovering = value;
-                OnHover?.Invoke(Hovering);
-                Console.WriteLine($"Hover changed to {value}");
-            }
+            if (value == Hovering) return;
+            Hovering = value;
+            OnHover?.Invoke(Hovering);
         }
 
         internal abstract void Draw(RenderWindow window);
