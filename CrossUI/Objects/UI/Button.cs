@@ -1,4 +1,5 @@
 ﻿
+using System;
 using CrossUI.Managers;
 using SFML.Graphics;
 using SFML.System;
@@ -53,17 +54,18 @@ namespace CrossUI.Objects.UI
 
         private void OnOnHover(bool inside)
         {
+            Console.WriteLine(ID);
             BackgroundRectangle.FillColor = inside ? Color.Blue : BackgroundColor;
             //BackgroundColor = Color.Blue;
         }
 
         public Text DisplayText;
-        public RectangleShape BackgroundRectangle;
+        public RectangleShape BackgroundRectangle { get; set; }
         private Color foreground;
         private string text;
         private Color backgroundColor;
 
-        internal override void Draw(RenderWindow window)
+        internal override void Draw(ref RenderWindow window)
         {
             window.Draw(BackgroundRectangle);
             window.Draw(DisplayText);

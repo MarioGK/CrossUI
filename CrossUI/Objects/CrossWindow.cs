@@ -9,13 +9,13 @@ using SFML.Window;
 
 namespace CrossUI.Objects
 {
-    public class Window : BaseObject
+    public class CrossWindow : BaseObject
     {
-        private RenderWindow window;
+        public RenderWindow RenderWindow;
 
-        public delegate void DrawDelegate(RenderWindow renderer);
+        public delegate void DrawDelegate(ref RenderWindow renderer);
 
-        public delegate void QuitDelegate(Window window);
+        public delegate void QuitDelegate(CrossWindow crossWindow);
 
         public event DrawDelegate OnDraw;
         public event QuitDelegate OnQuit;
@@ -39,33 +39,35 @@ namespace CrossUI.Objects
             ChildrenDictionary.Remove(id);
         }
 
-        public Window(string id) : base(id)
+        //public CrossWindow(string id) : base(id)
+        public CrossWindow(string id, bool createWindow = true) : base(id)
         {
             FontManager.Initialize();
             
             var settings = new ContextSettings{ AntialiasingLevel = 4};
+
+            if (createWindow)
+            {
+                RenderWindow = new RenderWindow(new VideoMode(800, 600), id, Styles.Default, settings);
+                RenderWindow.SetFramerateLimit(60);
             
-            window = new RenderWindow(new VideoMode(800, 600), id, Styles.Default, settings);
-            window.SetFramerateLimit(60);
-            window.Closed += WindowOnClosed;
-            
-            window.MouseMoved += WindowOnMouseMoved;
-            
+                RenderWindow.Closed += RenderWindowOnClosed;
+                RenderWindow.MouseMoved += RenderWindowOnMouseMoved;
+            }
+
             FPSText = new Text("00", FontManager.Font)
             {
                 FillColor = new Color(255,0,0), CharacterSize = 24,DisplayedString = "00"
             };
-            
-            AddChild(button);
         }
 
-        private void WindowOnClosed(object sender, EventArgs e)
+        private void RenderWindowOnClosed(object sender, EventArgs e)
         {
             OnQuit?.Invoke(this);
-            window.Close();
+            RenderWindow.Close();
         }
 
-        private void WindowOnMouseMoved(object sender, MouseMoveEventArgs e)
+        private void RenderWindowOnMouseMoved(object sender, MouseMoveEventArgs e)
         {
             foreach (var obj in Children)
             {
@@ -73,37 +75,40 @@ namespace CrossUI.Objects
             }
         }
 
-        private static readonly Button button = new Button("button", new Vector2f(100,100));
-        
         private readonly Clock clock = new Clock();
         public float DeltaTime { get; private set; }
 
-        public void Draw()
+        public void Draw(ref RenderWindow renderWindow)
         {
             DeltaTime = clock.Restart().AsSeconds();
             
-            window.Clear(Color.White);
+            renderWindow.Clear(Color.White);
             //FPS
             FPSText.DisplayedString = (1f / DeltaTime).ToString("00");
-            window.Draw(FPSText);
+            renderWindow.Draw(FPSText);
 
             foreach (var obj in Children)
             {
-                obj.Draw(window);
+                obj.Draw(ref renderWindow);
             }
             
-            OnDraw?.Invoke(window);
+            OnDraw?.Invoke(ref renderWindow);
             
-            window.Display();
+            renderWindow.Display();
         }
 
         public void Run()
         {
-            while (window.IsOpen)
+            while (RenderWindow.IsOpen)
             {
-                window.DispatchEvents();
-                Draw();
+                RenderWindow.DispatchEvents();
+                Draw(ref RenderWindow);
             }
+        }
+
+        public void DeleteAllChildren()
+        {
+            ChildrenDictionary = new Dictionary<string, BaseUIObject>();
         }
     }
 }

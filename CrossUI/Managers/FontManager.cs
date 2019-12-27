@@ -8,7 +8,7 @@ namespace CrossUI.Managers
 
         public static void Initialize()
         {
-            Font = new Font("segoeui.ttf");
+            Font = new Font("Segoe UI.ttf");
         }
     }
 }

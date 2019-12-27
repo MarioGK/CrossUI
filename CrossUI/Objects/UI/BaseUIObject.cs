@@ -12,7 +12,6 @@ namespace CrossUI.Objects.UI
         {
             ID = id;
             Position = position;
-            //DrawableObject = new RenderTexture(100,100);
         }
 
         public Vector2f Position { get; set; }
@@ -39,7 +38,7 @@ namespace CrossUI.Objects.UI
             OnHover?.Invoke(Hovering);
         }
 
-        internal abstract void Draw(RenderWindow window);
+        internal abstract void Draw(ref RenderWindow window);
         protected abstract void Update();
 
         public bool IsInside(float x, float y)
