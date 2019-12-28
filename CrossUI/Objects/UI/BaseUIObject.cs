@@ -39,7 +39,7 @@ namespace CrossUI.Objects.UI
         }
 
         internal abstract void Draw(ref RenderWindow window);
-        protected abstract void Update();
+        internal abstract void Update();
 
         public bool IsInside(float x, float y)
         {

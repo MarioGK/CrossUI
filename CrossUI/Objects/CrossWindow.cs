@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using CrossUI.Managers;
+using CrossUI.Objects.Animations;
 using CrossUI.Objects.UI;
 using SFML.Graphics;
 using SFML.System;
@@ -39,12 +40,16 @@ namespace CrossUI.Objects
             ChildrenDictionary.Remove(id);
         }
 
+        public Clock Clock { get; set; }
+
         //public CrossWindow(string id) : base(id)
         public CrossWindow(string id, bool createWindow = true) : base(id)
         {
-            FontManager.Initialize();
+            _Manager.InitializeAllManagers();
             
             var settings = new ContextSettings{ AntialiasingLevel = 4};
+            
+            Clock = new Clock();
 
             if (createWindow)
             {
@@ -52,13 +57,30 @@ namespace CrossUI.Objects
                 RenderWindow.SetFramerateLimit(60);
             
                 RenderWindow.Closed += RenderWindowOnClosed;
+                RenderWindow.Resized += (sender, args) =>
+                {
+                    RenderWindow.SetView(new View(new FloatRect(0, 0, args.Width, args.Height)));
+                    ForceUpdate();
+                };
                 RenderWindow.MouseMoved += RenderWindowOnMouseMoved;
+                RenderWindow.MouseButtonPressed += RenderWindowOnMouseButtonPressed;
             }
 
-            FPSText = new Text("00", FontManager.Font)
+            FPSText = new Text("00", FontManager.CurrentFont)
             {
                 FillColor = new Color(255,0,0), CharacterSize = 24,DisplayedString = "00"
             };
+        }
+
+        private void RenderWindowOnMouseButtonPressed(object sender, MouseButtonEventArgs e)
+        {
+            foreach (var child in Children)
+            {
+                if (child.IsInside(e.X, e.Y))
+                {
+                    child.TriggerOnClick();
+                }
+            }
         }
 
         private void RenderWindowOnClosed(object sender, EventArgs e)
@@ -78,7 +100,7 @@ namespace CrossUI.Objects
         private readonly Clock clock = new Clock();
         public float DeltaTime { get; private set; }
 
-        public void Draw(ref RenderWindow renderWindow)
+        public void Render(ref RenderWindow renderWindow)
         {
             DeltaTime = clock.Restart().AsSeconds();
             
@@ -86,6 +108,8 @@ namespace CrossUI.Objects
             //FPS
             FPSText.DisplayedString = (1f / DeltaTime).ToString("00");
             renderWindow.Draw(FPSText);
+            
+            AnimationManager.UpdateAll();
 
             foreach (var obj in Children)
             {
@@ -102,13 +126,21 @@ namespace CrossUI.Objects
             while (RenderWindow.IsOpen)
             {
                 RenderWindow.DispatchEvents();
-                Draw(ref RenderWindow);
+                Render(ref RenderWindow);
             }
         }
 
         public void DeleteAllChildren()
         {
             ChildrenDictionary = new Dictionary<string, BaseUIObject>();
+        }
+
+        public void ForceUpdate()
+        {
+            foreach (var child in Children)
+            {
+                child.Update();
+            }
         }
     }
 }

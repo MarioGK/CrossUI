@@ -9,10 +9,17 @@
 
     <ItemGroup>
       <Folder Include="Delegates" />
+      <Folder Include="Fonts" />
     </ItemGroup>
 
     <ItemGroup>
       <PackageReference Include="SFML.Net" Version="2.5.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <Content Include="Fonts\*.*">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
     </ItemGroup>
 
 </Project>

@@ -4,48 +4,57 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.Loader;
-using System.Threading.Tasks;
 using CliWrap;
-using CrossUI.Objects;
-using SFML.Graphics;
 
 namespace CrossUI.Viewer
 {
-    public static class Compiler
+    public class Compiler
     {
-        public static Assembly CurrentCompiledAssembly;
-        public static string ProjectPath;
-        public static AssemblyLoadContext LoadContext;
+        public Compiler(string projectPath)
+        {
+            this.projectPath = projectPath;
+            buildCommand = Cli.Wrap("cmd.exe").EnableExitCodeValidation(false)
+                .SetArguments($"/C cd {this.projectPath} & dotnet build  --no-restore --no-dependencies");
+        }
 
-        private static CrossWindow crossWindow;
+        private Assembly currentCompiledAssembly;
+        private readonly string projectPath;
+        private AssemblyLoadContext loadContext;
 
-        public static void Build()
+        private readonly ICli buildCommand;
+
+        public void Build()
         {
             try
             {
-                LoadContext = new AssemblyLoadContext("Compiler Context", true);
+                var stopwatch = Stopwatch.StartNew();
 
-                var stahp = Stopwatch.StartNew();
-                var result = Cli.Wrap("cmd.exe").EnableExitCodeValidation(false)
-                    .SetArguments($"/C cd {ProjectPath} & dotnet build  --no-restore --no-dependencies").Execute();
+                loadContext = new AssemblyLoadContext("Compiler Context", true);
+                
+                var result = buildCommand.Execute();
                 
                 Console.WriteLine(result.StandardOutput);
 
                 var path = @"F:\Projects\CrossUI\CrossUI.TestSample\bin\Debug\netcoreapp3.1\CrossUI.TestSample.dll";
 
                 var fileStream = File.Open(path, FileMode.Open, FileAccess.Read);
-                CurrentCompiledAssembly = LoadContext.LoadFromStream(fileStream);
+                currentCompiledAssembly = loadContext.LoadFromStream(fileStream);
                 fileStream.Close();
                 fileStream.Dispose();
 
-                var program = CurrentCompiledAssembly.GetTypes().FirstOrDefault(x => x.Name == "Program");
+                var program = currentCompiledAssembly.GetTypes().FirstOrDefault(x => x.Name == "Program");
                 
                 Program.Window.DeleteAllChildren();
+
+                if (program != null)
+                {
+                    var configure = program.GetMethod("Configure");
+                    if (configure != null) configure.Invoke(null, new object?[] {Program.Window});
+                }
                 
-                var configure = program.GetMethod("Configure");
-                configure.Invoke(null, new object?[]{Program.Window} );
-                
-                Console.WriteLine($"Finished Compiling in {stahp.ElapsedMilliseconds}MS");
+                Program.Window.ForceUpdate();
+
+                Console.WriteLine($"Finished Compiling in {stopwatch.ElapsedMilliseconds}MS");
             }
             catch (Exception e)
             {
@@ -53,10 +62,10 @@ namespace CrossUI.Viewer
             }
         }
 
-        public static void DisableDraw()
+        public void DisableDraw()
         {
-            LoadContext.Unload();
-            CurrentCompiledAssembly = null;
+            loadContext.Unload();
+            currentCompiledAssembly = null;
             GC.Collect();
             GC.WaitForPendingFinalizers();
         }

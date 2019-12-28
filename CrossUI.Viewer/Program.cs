@@ -1,7 +1,5 @@
 ﻿using System;
 using CrossUI.Objects;
-using SFML.Graphics;
-using SFML.Window;
 
 namespace CrossUI.Viewer
 {
@@ -11,10 +9,16 @@ namespace CrossUI.Viewer
         public static void Main(string[] args)
         {
             var projectPath = @"F:\Projects\CrossUI\CrossUI.TestSample\";
-            FileWatch.Start(projectPath);
-            Compiler.ProjectPath = projectPath;
-            Compiler.Build();
-            
+            var compiler = new Compiler(projectPath);
+            compiler.Build();
+
+            var fileWatch = new FileWatch(projectPath);
+            fileWatch.OnChanged += () =>
+            {
+                compiler.DisableDraw();
+                compiler.Build();
+            };
+
             Window.Run();
             Console.Read();
             return;

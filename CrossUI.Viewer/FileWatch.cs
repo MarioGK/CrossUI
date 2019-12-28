@@ -1,18 +1,17 @@
 ﻿using System;
 using System.IO;
-using System.Threading.Tasks;
 
 namespace CrossUI.Viewer
 {
-    public static class FileWatch
+    public class FileWatch
     {
-        public static FileSystemWatcher Watcher;
+        public readonly FileSystemWatcher Watcher;
 
-        public static bool Started;
+        public bool Started;
 
-        private static int lastTime;
+        private int lastTime;
 
-        public static void Start(string path)
+        public FileWatch(string path)
         {
             Watcher = new FileSystemWatcher
             {
@@ -27,16 +26,16 @@ namespace CrossUI.Viewer
             Started = true;
         }
 
-        private static void WatcherOnChanged(object sender, FileSystemEventArgs e)
+        public delegate void OnChangedDelegate();
+
+        public event OnChangedDelegate OnChanged;
+
+        private void WatcherOnChanged(object sender, FileSystemEventArgs e)
         {
             try
             {
                 Watcher.EnableRaisingEvents = false;
-
-                Console.Clear();
-                Compiler.DisableDraw();
-                Console.WriteLine("File changed!");
-                Compiler.Build();
+                OnChanged?.Invoke();
             }
 
             finally
