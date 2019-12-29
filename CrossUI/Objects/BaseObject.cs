@@ -9,6 +9,6 @@
 
         public string ID { get; set; }
         
-        public BaseObject Parent { get; set; } = null;
+        public BaseObject Parent { get; set; }
     }
 }

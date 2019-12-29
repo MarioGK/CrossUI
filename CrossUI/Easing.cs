@@ -10,15 +10,7 @@ namespace CrossUI
 
         
         #region Linear
-
-        /// <summary>
-        /// Easing equation function for a simple linear tweening, with no easing.
-        /// </summary>
-        /// <param name="time">Current time in seconds.</param>
-        /// <param name="startingValue">Starting value.</param>
-        /// <param name="finalValue">Final value.</param>
-        /// <param name="duration">Duration of animation.</param>
-        /// <returns>The correct value.</returns>
+        
         public static float Linear(float time, float startingValue, float finalValue, float duration)
         {
             return finalValue * time / duration + startingValue;
@@ -756,24 +748,15 @@ namespace CrossUI
 
                 return c / 2 * ((time -= 2) * time * (((s *= (1.525f)) + 1) * time + s) + 2) + b;
             }
-
-            /// <summary>
-            /// Easing equation function for a back (overshooting cubic easing: (s+1)*t^3 - s*t^2) easing out/in: 
-            /// deceleration until halfway, then acceleration.
-            /// </summary>
-            /// <param name="time">Current time in seconds.</param>
-            /// <param name="b">Starting value.</param>
-            /// <param name="c">Final value.</param>
-            /// <param name="d">Duration of animation.</param>
-            /// <returns>The correct value.</returns>
-            public static float EaseOutIn(float time, float b, float c, float d)
+            
+            public static float EaseOutIn(float time, float initialValue, float finalValue, float duration)
             {
-                if (time < d / 2)
+                if (time < duration / 2)
                 {
-                    return EaseOut(time * 2, b, c / 2, d);
+                    return EaseOut(time * 2, initialValue, finalValue / 2, duration);
                 }
 
-                return EaseIn((time * 2) - d, b + c / 2, c / 2, d);
+                return EaseIn((time * 2) - duration, initialValue + finalValue / 2, finalValue / 2, duration);
             }
         }
     }

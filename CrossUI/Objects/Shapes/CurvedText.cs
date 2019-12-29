@@ -34,10 +34,16 @@ namespace CrossUI.Objects.Shapes
         public void Draw(RenderTarget target, RenderStates states)
         {
             if (Font == null)
+            {
                 return;
+            }
+
             states.Transform *= Transform;
             if (Centered)
+            {
                 states.Transform *= centerTransform;
+            }
+
             states.Texture = Font.GetTexture(CharacterSize);
             target.Draw(vertices, states);
         }
@@ -45,7 +51,10 @@ namespace CrossUI.Objects.Shapes
         private void UpdateGeometry()
         {
             if (font == null)
+            {
                 return;
+            }
+
             vertices.Clear();
             var hspace = Font.GetGlyph(' ', CharacterSize, true, 0f).Advance;
             var vspace = Font.GetLineSpacing(CharacterSize);
@@ -171,7 +180,7 @@ namespace CrossUI.Objects.Shapes
                 color = value;
                 for (uint i = 0; i < vertices.VertexCount; i++)
                 {
-                    Vertex v = vertices[i];
+                    var v = vertices[i];
                     v.Color = color;
                     vertices[i] = v;
                 }

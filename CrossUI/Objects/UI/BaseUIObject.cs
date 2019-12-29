@@ -1,6 +1,7 @@
 ﻿
 
 using System;
+using CrossUI.Enumerations;
 using SFML.Graphics;
 using SFML.System;
 
@@ -23,6 +24,9 @@ namespace CrossUI.Objects.UI
 
         public event ClickDelegate OnClick;
         public event HoverDelegate OnHover;
+
+        public Anchor Anchors { get; set; }
+        public Margin Margin { get; set; }
         
         public FloatRect Rect { get; protected set; }
 
@@ -33,7 +37,11 @@ namespace CrossUI.Objects.UI
         
         internal void TriggerOnHover(bool value)
         {
-            if (value == Hovering) return;
+            if (value == Hovering)
+            {
+                return;
+            }
+
             Hovering = value;
             OnHover?.Invoke(Hovering);
         }
