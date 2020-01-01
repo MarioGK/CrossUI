@@ -1,4 +1,5 @@
-﻿using SFML.Graphics;
+﻿using CrossUI.Objects.UI;
+using SFML.Graphics;
 
 namespace CrossUI.Objects.Animations
 {
@@ -7,9 +8,7 @@ namespace CrossUI.Objects.Animations
         public Color OriginalColor { get; set; }
         public Color NewColor { get; set; }
 
-        public new Shape Target { get; set; }
-        
-        public ColorAnimation(float duration, Shape target, Color newColor) : base(duration, target)
+        public ColorAnimation(BaseUIObject target, float duration, Color newColor) : base(target, duration)
         {
             Target = target;
             if (target == null)
@@ -20,19 +19,19 @@ namespace CrossUI.Objects.Animations
             
             NewColor = newColor;
 
-            OriginalColor = target.FillColor;
+            //OriginalColor = target.;
             
             OnFinish += OnOnFinish;
         }
 
         private void OnOnFinish()
         {
-            Target.FillColor = OriginalColor;
+            //Target.FillColor = OriginalColor;
         }
 
         public override void Play()
         {
-            Target.FillColor = NewColor;
+            //Target.FillColor = NewColor;
             base.Play();
         }
     }

@@ -1,6 +1,7 @@
 ﻿
 
 using System;
+using System.Collections.Generic;
 using CrossUI.Enumerations;
 using SFML.Graphics;
 using SFML.System;
@@ -14,6 +15,8 @@ namespace CrossUI.Objects.UI
             ID = id;
             Position = position;
         }
+
+        public CrossWindow ParentWindow { get; set; }
 
         public Vector2f Position { get; set; }
 
@@ -52,6 +55,11 @@ namespace CrossUI.Objects.UI
         public bool IsInside(float x, float y)
         {
             return Rect.Contains(x, y);
+        }
+
+        public void NotifyUIChange()
+        {
+            ParentWindow.RequiresRenderUpdate = true;
         }
     }
 }

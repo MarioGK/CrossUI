@@ -2,6 +2,7 @@
 using System.Linq;
 using CrossUI.Enumerations;
 using CrossUI.Objects.Animations;
+using CrossUI.Objects.UI;
 using SFML.Graphics;
 using SFML.System;
 
@@ -31,16 +32,16 @@ namespace CrossUI.Managers
 
     public static class AnimationExtensions
     {
-        public static void AnimateColorChange(this Shape shape, Color color, float duration)
+        public static void AnimateColorChange(this BaseUIObject target, Color color, float duration)
         {
-            var animation = new ColorAnimation(duration, shape, color);
+            var animation = new ColorAnimation(target, duration, color);
             AnimationManager.Animations.Add(animation);
             animation.Play();
         }
 
-        public static void AnimateElasticMove(this Transformable target, Vector2f finalPosition, float duration)
+        public static void AnimateElasticMove(this BaseUIObject target, Vector2f finalPosition, float duration)
         {
-            var animation = new ElasticAnimation(duration, target, finalPosition);
+            var animation = new ElasticAnimation(target, duration, finalPosition);
             AnimationManager.Animations.Add(animation);
             animation.Play();
         }

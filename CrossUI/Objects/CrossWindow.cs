@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using CrossUI.Enumerations;
 using CrossUI.Managers;
 using CrossUI.Objects.Animations;
+using CrossUI.Objects.Theme;
 using CrossUI.Objects.UI;
 using SFML.Graphics;
 using SFML.System;
@@ -21,10 +23,6 @@ namespace CrossUI.Objects
         public event DrawDelegate OnDraw;
         public event QuitDelegate OnQuit;
 
-        public Color BackgroundColor { get; set; } = new Color(255,255,255);
-
-        public Text FPSText { get; set; }
-
         internal Dictionary<string, BaseUIObject> ChildrenDictionary { get; set; } = new Dictionary<string, BaseUIObject>();
 
         public IEnumerable<BaseUIObject> Children => ChildrenDictionary.Values;
@@ -32,6 +30,7 @@ namespace CrossUI.Objects
         public void AddChild(BaseUIObject obj)
         {
             obj.Parent = this;
+            obj.ParentWindow = this;
             ChildrenDictionary.Add(obj.ID, obj);
         }
 
@@ -49,27 +48,22 @@ namespace CrossUI.Objects
             
             var settings = new ContextSettings{ AntialiasingLevel = 4};
             
+            RequiresRenderUpdate = true;
+            
             Clock = new Clock();
 
-            if (createWindow)
-            {
-                RenderWindow = new RenderWindow(new VideoMode(800, 600), id, Styles.Default, settings);
-                RenderWindow.SetFramerateLimit(60);
+            if (!createWindow) return;
+            RenderWindow = new RenderWindow(new VideoMode(800, 600), id, Styles.Default, settings);
+            RenderWindow.SetFramerateLimit(60);
             
-                RenderWindow.Closed += RenderWindowOnClosed;
-                RenderWindow.Resized += (sender, args) =>
-                {
-                    RenderWindow.SetView(new View(new FloatRect(0, 0, args.Width, args.Height)));
-                    ForceUpdate();
-                };
-                RenderWindow.MouseMoved += RenderWindowOnMouseMoved;
-                RenderWindow.MouseButtonPressed += RenderWindowOnMouseButtonPressed;
-            }
-
-            FPSText = new Text("00", FontManager.CurrentFont)
+            RenderWindow.Closed += RenderWindowOnClosed;
+            RenderWindow.Resized += (sender, args) =>
             {
-                FillColor = new Color(255,0,0), CharacterSize = 24,DisplayedString = "00"
+                RenderWindow.SetView(new View(new FloatRect(0, 0, args.Width, args.Height)));
+                ForceUpdate();
             };
+            RenderWindow.MouseMoved += RenderWindowOnMouseMoved;
+            RenderWindow.MouseButtonPressed += RenderWindowOnMouseButtonPressed;
         }
 
         private void RenderWindowOnMouseButtonPressed(object sender, MouseButtonEventArgs e)
@@ -97,18 +91,21 @@ namespace CrossUI.Objects
             }
         }
 
-        private readonly Clock clock = new Clock();
-        public float DeltaTime { get; private set; }
+        public static WindowTheme Theme => ThemeManager.CurrentThemeConfiguration.WindowTheme;
 
         public void Render(ref RenderWindow renderWindow)
         {
-            DeltaTime = clock.Restart().AsSeconds();
+            if (!RequiresRenderUpdate)
+            {
+                return;
+            }
+
+            RequiresRenderUpdate = false;
             
-            renderWindow.Clear(Color.White);
-            //FPS
-            FPSText.DisplayedString = (1f / DeltaTime).ToString("00");
-            renderWindow.Draw(FPSText);
+            Console.WriteLine("rendering...");
             
+            renderWindow.Clear(Theme.Background);
+
             AnimationManager.UpdateAll();
 
             foreach (var obj in Children)
@@ -120,6 +117,8 @@ namespace CrossUI.Objects
             
             renderWindow.Display();
         }
+
+        public bool RequiresRenderUpdate { get; set; }
 
         public void Run()
         {

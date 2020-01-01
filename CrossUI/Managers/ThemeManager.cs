@@ -1,13 +1,14 @@
 ﻿using CrossUI.Objects;
+using CrossUI.Objects.Theme;
 using SFML.Graphics;
 
 namespace CrossUI.Managers
 {
     public static class ThemeManager
     {
-        public static Theme CurrentTheme { get; set; }
+        public static ThemeConfiguration CurrentThemeConfiguration { get; set; }
 
-        public static Theme MaterialTheme = new Theme
+        public static ThemeConfiguration MaterialThemeConfiguration = new ThemeConfiguration
         {
             ButtonColor = Color.Blue,
             ButtonForeground = Color.White,
@@ -22,7 +23,7 @@ namespace CrossUI.Managers
             }
 
             Initialized = true;
-            CurrentTheme = MaterialTheme;
+            CurrentThemeConfiguration = MaterialThemeConfiguration;
         }
 
         public static bool Initialized { get; set; }

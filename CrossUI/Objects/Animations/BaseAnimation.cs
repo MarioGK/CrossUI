@@ -13,12 +13,12 @@ namespace CrossUI.Objects.Animations
         public AnimationState State { get; set; }
         public bool Finished => Clock.ElapsedTime.AsSeconds() > Duration;
 
-        public Transformable Target { get; set; }
+        public BaseUIObject Target { get; set; }
 
         public Vector2f InitialPosition { get; set; }
         public Vector2f FinalPosition { get; set; }
 
-        public BaseAnimation(float duration, Transformable target)
+        public BaseAnimation(BaseUIObject target, float duration)
         {
             Clock = new Clock();
             Duration = duration;
@@ -33,11 +33,13 @@ namespace CrossUI.Objects.Animations
         
         public virtual void Update()
         {
+            Target.Update();
             if (Finished)
             {
                 State = AnimationState.Finished;
                 OnFinish?.Invoke();
             }
+            
         }
 
         public void Reset()
