@@ -1,14 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using CrossUI.Enumerations;
 using CrossUI.Managers;
 using CrossUI.Objects.Animations;
 using CrossUI.Objects.Theme;
 using CrossUI.Objects.UI;
-using SFML.Graphics;
-using SFML.System;
-using SFML.Window;
+using CrossUI.SFML.Graphics;
+using CrossUI.SFML.System;
+using CrossUI.SFML.Window;
 
 namespace CrossUI.Objects
 {
@@ -97,6 +98,7 @@ namespace CrossUI.Objects
         {
             if (!RequiresRenderUpdate)
             {
+                Thread.Sleep(15);
                 return;
             }
 
@@ -105,8 +107,6 @@ namespace CrossUI.Objects
             Console.WriteLine("rendering...");
             
             renderWindow.Clear(Theme.Background);
-
-            AnimationManager.UpdateAll();
 
             foreach (var obj in Children)
             {

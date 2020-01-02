@@ -1,4 +1,4 @@
-﻿using SFML.Graphics;
+﻿using CrossUI.SFML.Graphics;
 
 namespace CrossUI.Managers
 {

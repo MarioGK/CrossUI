@@ -1,5 +1,6 @@
-﻿using SFML.Graphics;
-using SFML.System;
+﻿using CrossUI.SFML.Graphics;
+using CrossUI.SFML.System;
+using SFML.Graphics;
 
 namespace CrossUI.Objects.UI
 {

@@ -3,8 +3,9 @@
 using System;
 using System.Collections.Generic;
 using CrossUI.Enumerations;
+using CrossUI.SFML.Graphics;
+using CrossUI.SFML.System;
 using SFML.Graphics;
-using SFML.System;
 
 namespace CrossUI.Objects.UI
 {

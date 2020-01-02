@@ -1,8 +1,9 @@
 ﻿using System;
 using CrossUI.Managers;
 using CrossUI.Objects.Shapes;
+using CrossUI.SFML.Graphics;
+using CrossUI.SFML.System;
 using SFML.Graphics;
-using SFML.System;
 
 namespace CrossUI.Objects.UI
 {
@@ -91,7 +92,6 @@ namespace CrossUI.Objects.UI
         private void OnOnClick()
         {
             //BackgroundRectangle.AnimateColorChange(Color.Yellow, 2f);
-            this.AnimateElasticMove(new Vector2f(50, 50), 10f);
         }
 
         private void OnOnHover(bool inside)

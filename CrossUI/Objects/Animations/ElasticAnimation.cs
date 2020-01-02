@@ -1,7 +1,7 @@
 ﻿using System;
 using CrossUI.Objects.UI;
+using CrossUI.SFML.System;
 using SFML.Graphics;
-using SFML.System;
 
 namespace CrossUI.Objects.Animations
 {

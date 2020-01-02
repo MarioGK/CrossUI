@@ -1,10 +1,11 @@
 ﻿using System;
+using CrossUI.SFML.Graphics;
+using CrossUI.SFML.System;
 using SFML.Graphics;
-using SFML.System;
 
 namespace CrossUI.Objects.Shapes
 {
-    public class CurvedText : Transformable, Drawable
+    public class CurvedText : Transformable, IDrawable
     {
         public CurvedText(
             string str,

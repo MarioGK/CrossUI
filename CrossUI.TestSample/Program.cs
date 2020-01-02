@@ -1,7 +1,6 @@
 ﻿using CrossUI.Objects;
 using CrossUI.Objects.UI;
-using SFML.Graphics;
-using SFML.System;
+using CrossUI.SFML.System;
 
 namespace CrossUI.TestSample
  {
