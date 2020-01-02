@@ -1,13 +1,12 @@
 ﻿using System;
 using CrossUI.SFML.Graphics;
 using CrossUI.SFML.System;
-using SFML.Graphics;
 
 namespace CrossUI.Objects.Shapes
 {
     public class RoundedLine : Shape
     {
-        public RoundedLine(Vector2f startPoint, Vector2f endPosition, float width)
+        public RoundedLine(Vector2F startPoint, Vector2F endPosition, float width)
         {
             Position = startPoint;
             EndPosition = endPosition;
@@ -15,7 +14,7 @@ namespace CrossUI.Objects.Shapes
             Update();
         }
         
-        public Vector2f EndPosition { get; set; }
+        public Vector2F EndPosition { get; set; }
         public float Width { get; set; }
         
         public override uint GetPointCount()
@@ -23,12 +22,12 @@ namespace CrossUI.Objects.Shapes
             return 30;
         }
 
-        public override Vector2f GetPoint(uint index)
+        public override Vector2F GetPoint(uint index)
         {
-            var p1 = new Vector2f(1.0f, 0.0f);
-            var p2 = EndPosition + new Vector2f(1.0f, 0.0f) - Position;
+            var p1 = new Vector2F(1.0f, 0.0f);
+            var p2 = EndPosition + new Vector2F(1.0f, 0.0f) - Position;
 
-            Vector2f offset;
+            Vector2F offset;
             int iFlipDirection;
 
             if(index < 15)
@@ -49,7 +48,7 @@ namespace CrossUI.Objects.Shapes
             var x = MathF.Cos(angle) * Width / 2;
             var y = MathF.Sin(angle) * Width / 2;
 
-            return new Vector2f(offset.X + x * iFlipDirection, offset.Y + y * iFlipDirection);
+            return new Vector2F(offset.X + x * iFlipDirection, offset.Y + y * iFlipDirection);
         }
     }
 }

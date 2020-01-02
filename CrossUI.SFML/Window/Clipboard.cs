@@ -48,10 +48,10 @@ namespace CrossUI.SFML.Window
             }
         }
 
-        [DllImport(CSFML.window, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
-        static extern IntPtr sfClipboard_getUnicodeString();
+        [DllImport(Csfml.Window, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
+        private static extern IntPtr sfClipboard_getUnicodeString();
 
-        [DllImport(CSFML.window, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
-        static extern void sfClipboard_setUnicodeString(IntPtr ptr);
+        [DllImport(Csfml.Window, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
+        private static extern void sfClipboard_setUnicodeString(IntPtr ptr);
     }
 }

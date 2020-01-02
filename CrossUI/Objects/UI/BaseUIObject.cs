@@ -5,13 +5,12 @@ using System.Collections.Generic;
 using CrossUI.Enumerations;
 using CrossUI.SFML.Graphics;
 using CrossUI.SFML.System;
-using SFML.Graphics;
 
 namespace CrossUI.Objects.UI
 {
     public abstract class BaseUIObject : BaseObject
     {
-        public BaseUIObject(string id, Vector2f position) : base(id)
+        public BaseUIObject(string id, Vector2F position) : base(id)
         {
             ID = id;
             Position = position;
@@ -19,7 +18,7 @@ namespace CrossUI.Objects.UI
 
         public CrossWindow ParentWindow { get; set; }
 
-        public Vector2f Position { get; set; }
+        public Vector2F Position { get; set; }
 
         public bool Hovering { get; set; }
 

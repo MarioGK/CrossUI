@@ -1,7 +1,6 @@
 ﻿using System;
 using CrossUI.SFML.Graphics;
 using CrossUI.SFML.System;
-using SFML.Graphics;
 
 namespace CrossUI.Objects.Shapes
 {
@@ -32,7 +31,7 @@ namespace CrossUI.Objects.Shapes
             Font = font;
         }
 
-        public void Draw(RenderTarget target, RenderStates states)
+        public void Draw(IRenderTarget target, RenderStates states)
         {
             if (Font == null)
             {
@@ -108,20 +107,20 @@ namespace CrossUI.Objects.Shapes
 
                 transform.Rotate(angle, x0 - g.Bounds.Width / 2f, Radius / 2f);
 
-                var topLeft = new Vector2f(x0, y0);
-                var bottomLeft = new Vector2f(x0, y1);
-                var topRight = new Vector2f(x1, y0);
-                var bottomRight = new Vector2f(x1, y1);
+                var topLeft = new Vector2F(x0, y0);
+                var bottomLeft = new Vector2F(x0, y1);
+                var topRight = new Vector2F(x1, y0);
+                var bottomRight = new Vector2F(x1, y1);
 
                 topLeft = transform.TransformPoint(topLeft);
                 topRight = transform.TransformPoint(topRight);
                 bottomLeft = transform.TransformPoint(bottomLeft);
                 bottomRight = transform.TransformPoint(bottomRight);
 
-                vertices.Append(new Vertex(topLeft, Color, new Vector2f(u0, v0)));
-                vertices.Append(new Vertex(topRight, Color, new Vector2f(u1, v0)));
-                vertices.Append(new Vertex(bottomRight, Color, new Vector2f(u1, v1)));
-                vertices.Append(new Vertex(bottomLeft, Color, new Vector2f(u0, v1)));
+                vertices.Append(new Vertex(topLeft, Color, new Vector2F(u0, v0)));
+                vertices.Append(new Vertex(topRight, Color, new Vector2F(u1, v0)));
+                vertices.Append(new Vertex(bottomRight, Color, new Vector2F(u1, v1)));
+                vertices.Append(new Vertex(bottomLeft, Color, new Vector2F(u0, v1)));
 
                 previousX = x;
                 x += g.Advance;

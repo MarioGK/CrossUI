@@ -54,7 +54,7 @@ namespace CrossUI.Objects
             Clock = new Clock();
 
             if (!createWindow) return;
-            RenderWindow = new RenderWindow(new VideoMode(800, 600), id, Styles.Default, settings);
+            RenderWindow = new RenderWindow(new VideoMode(800, 600), id, Window.Styles.Default, settings);
             RenderWindow.SetFramerateLimit(60);
             
             RenderWindow.Closed += RenderWindowOnClosed;

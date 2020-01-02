@@ -10,7 +10,7 @@ namespace CrossUI.SFML.System
     /// </summary>
     ////////////////////////////////////////////////////////////
     [StructLayout(LayoutKind.Sequential)]
-    public struct Vector2f : IEquatable<Vector2f>
+    public struct Vector2F : IEquatable<Vector2F>
     {
         ////////////////////////////////////////////////////////////
         /// <summary>
@@ -19,7 +19,7 @@ namespace CrossUI.SFML.System
         /// <param name="x">X coordinate</param>
         /// <param name="y">Y coordinate</param>
         ////////////////////////////////////////////////////////////
-        public Vector2f(float x, float y)
+        public Vector2F(float x, float y)
         {
             X = x;
             Y = y;
@@ -32,7 +32,7 @@ namespace CrossUI.SFML.System
         /// <param name="v">Vector to negate</param>
         /// <returns>-v</returns>
         ////////////////////////////////////////////////////////////
-        public static Vector2f operator -(Vector2f v) => new Vector2f(-v.X, -v.Y);
+        public static Vector2F operator -(Vector2F v) => new Vector2F(-v.X, -v.Y);
 
         ////////////////////////////////////////////////////////////
         /// <summary>
@@ -42,7 +42,7 @@ namespace CrossUI.SFML.System
         /// <param name="v2">Second vector</param>
         /// <returns>v1 - v2</returns>
         ////////////////////////////////////////////////////////////
-        public static Vector2f operator -(Vector2f v1, Vector2f v2) => new Vector2f(v1.X - v2.X, v1.Y - v2.Y);
+        public static Vector2F operator -(Vector2F v1, Vector2F v2) => new Vector2F(v1.X - v2.X, v1.Y - v2.Y);
 
         ////////////////////////////////////////////////////////////
         /// <summary>
@@ -52,7 +52,7 @@ namespace CrossUI.SFML.System
         /// <param name="v2">Second vector</param>
         /// <returns>v1 + v2</returns>
         ////////////////////////////////////////////////////////////
-        public static Vector2f operator +(Vector2f v1, Vector2f v2) => new Vector2f(v1.X + v2.X, v1.Y + v2.Y);
+        public static Vector2F operator +(Vector2F v1, Vector2F v2) => new Vector2F(v1.X + v2.X, v1.Y + v2.Y);
 
         ////////////////////////////////////////////////////////////
         /// <summary>
@@ -62,7 +62,7 @@ namespace CrossUI.SFML.System
         /// <param name="x">Scalar value</param>
         /// <returns>v * x</returns>
         ////////////////////////////////////////////////////////////
-        public static Vector2f operator *(Vector2f v, float x) => new Vector2f(v.X * x, v.Y * x);
+        public static Vector2F operator *(Vector2F v, float x) => new Vector2F(v.X * x, v.Y * x);
 
         ////////////////////////////////////////////////////////////
         /// <summary>
@@ -72,7 +72,7 @@ namespace CrossUI.SFML.System
         /// <param name="v">Vector</param>
         /// <returns>x * v</returns>
         ////////////////////////////////////////////////////////////
-        public static Vector2f operator *(float x, Vector2f v) => new Vector2f(v.X * x, v.Y * x);
+        public static Vector2F operator *(float x, Vector2F v) => new Vector2F(v.X * x, v.Y * x);
 
         ////////////////////////////////////////////////////////////
         /// <summary>
@@ -82,7 +82,7 @@ namespace CrossUI.SFML.System
         /// <param name="x">Scalar value</param>
         /// <returns>v / x</returns>
         ////////////////////////////////////////////////////////////
-        public static Vector2f operator /(Vector2f v, float x) => new Vector2f(v.X / x, v.Y / x);
+        public static Vector2F operator /(Vector2F v, float x) => new Vector2F(v.X / x, v.Y / x);
 
         ////////////////////////////////////////////////////////////
         /// <summary>
@@ -92,7 +92,7 @@ namespace CrossUI.SFML.System
         /// <param name="v2">Second vector</param>
         /// <returns>v1 == v2</returns>
         ////////////////////////////////////////////////////////////
-        public static bool operator ==(Vector2f v1, Vector2f v2) => v1.Equals(v2);
+        public static bool operator ==(Vector2F v1, Vector2F v2) => v1.Equals(v2);
 
         ////////////////////////////////////////////////////////////
         /// <summary>
@@ -102,7 +102,7 @@ namespace CrossUI.SFML.System
         /// <param name="v2">Second vector</param>
         /// <returns>v1 != v2</returns>
         ////////////////////////////////////////////////////////////
-        public static bool operator !=(Vector2f v1, Vector2f v2) => !v1.Equals(v2);
+        public static bool operator !=(Vector2F v1, Vector2F v2) => !v1.Equals(v2);
 
         ////////////////////////////////////////////////////////////
         /// <summary>
@@ -119,7 +119,7 @@ namespace CrossUI.SFML.System
         /// <param name="obj">Object to check</param>
         /// <returns>Object and vector are equal</returns>
         ////////////////////////////////////////////////////////////
-        public override bool Equals(object obj) => ( obj is Vector2f ) && Equals((Vector2f)obj);
+        public override bool Equals(object obj) => ( obj is Vector2F ) && Equals((Vector2F)obj);
 
         ///////////////////////////////////////////////////////////
         /// <summary>
@@ -128,7 +128,7 @@ namespace CrossUI.SFML.System
         /// <param name="other">Vector to check</param>
         /// <returns>Vectors are equal</returns>
         ////////////////////////////////////////////////////////////
-        public bool Equals(Vector2f other) => ( X == other.X ) && ( Y == other.Y );
+        public bool Equals(Vector2F other) => ( X == other.X ) && ( Y == other.Y );
 
         ////////////////////////////////////////////////////////////
         /// <summary>
@@ -145,7 +145,7 @@ namespace CrossUI.SFML.System
         /// <param name="v">Vector being casted</param>
         /// <returns>Casting result</returns>
         ////////////////////////////////////////////////////////////
-        public static explicit operator Vector2i(Vector2f v) => new Vector2i((int)v.X, (int)v.Y);
+        public static explicit operator Vector2I(Vector2F v) => new Vector2I((int)v.X, (int)v.Y);
 
         ////////////////////////////////////////////////////////////
         /// <summary>
@@ -154,7 +154,7 @@ namespace CrossUI.SFML.System
         /// <param name="v">Vector being casted</param>
         /// <returns>Casting result</returns>
         ////////////////////////////////////////////////////////////
-        public static explicit operator Vector2u(Vector2f v) => new Vector2u((uint)v.X, (uint)v.Y);
+        public static explicit operator Vector2U(Vector2F v) => new Vector2U((uint)v.X, (uint)v.Y);
 
         /// <summary>X (horizontal) component of the vector</summary>
         public float X;
@@ -170,7 +170,7 @@ namespace CrossUI.SFML.System
     /// </summary>
     ////////////////////////////////////////////////////////////
     [StructLayout(LayoutKind.Sequential)]
-    public struct Vector2i : IEquatable<Vector2i>
+    public struct Vector2I : IEquatable<Vector2I>
     {
         ////////////////////////////////////////////////////////////
         /// <summary>
@@ -179,7 +179,7 @@ namespace CrossUI.SFML.System
         /// <param name="x">X coordinate</param>
         /// <param name="y">Y coordinate</param>
         ////////////////////////////////////////////////////////////
-        public Vector2i(int x, int y)
+        public Vector2I(int x, int y)
         {
             X = x;
             Y = y;
@@ -192,7 +192,7 @@ namespace CrossUI.SFML.System
         /// <param name="v">Vector to negate</param>
         /// <returns>-v</returns>
         ////////////////////////////////////////////////////////////
-        public static Vector2i operator -(Vector2i v) => new Vector2i(-v.X, -v.Y);
+        public static Vector2I operator -(Vector2I v) => new Vector2I(-v.X, -v.Y);
 
         ////////////////////////////////////////////////////////////
         /// <summary>
@@ -202,7 +202,7 @@ namespace CrossUI.SFML.System
         /// <param name="v2">Second vector</param>
         /// <returns>v1 - v2</returns>
         ////////////////////////////////////////////////////////////
-        public static Vector2i operator -(Vector2i v1, Vector2i v2) => new Vector2i(v1.X - v2.X, v1.Y - v2.Y);
+        public static Vector2I operator -(Vector2I v1, Vector2I v2) => new Vector2I(v1.X - v2.X, v1.Y - v2.Y);
 
         ////////////////////////////////////////////////////////////
         /// <summary>
@@ -212,7 +212,7 @@ namespace CrossUI.SFML.System
         /// <param name="v2">Second vector</param>
         /// <returns>v1 + v2</returns>
         ////////////////////////////////////////////////////////////
-        public static Vector2i operator +(Vector2i v1, Vector2i v2) => new Vector2i(v1.X + v2.X, v1.Y + v2.Y);
+        public static Vector2I operator +(Vector2I v1, Vector2I v2) => new Vector2I(v1.X + v2.X, v1.Y + v2.Y);
 
         ////////////////////////////////////////////////////////////
         /// <summary>
@@ -222,7 +222,7 @@ namespace CrossUI.SFML.System
         /// <param name="x">Scalar value</param>
         /// <returns>v * x</returns>
         ////////////////////////////////////////////////////////////
-        public static Vector2i operator *(Vector2i v, int x) => new Vector2i(v.X * x, v.Y * x);
+        public static Vector2I operator *(Vector2I v, int x) => new Vector2I(v.X * x, v.Y * x);
 
         ////////////////////////////////////////////////////////////
         /// <summary>
@@ -232,7 +232,7 @@ namespace CrossUI.SFML.System
         /// <param name="v">Vector</param>
         /// <returns>x * v</returns>
         ////////////////////////////////////////////////////////////
-        public static Vector2i operator *(int x, Vector2i v) => new Vector2i(v.X * x, v.Y * x);
+        public static Vector2I operator *(int x, Vector2I v) => new Vector2I(v.X * x, v.Y * x);
 
         ////////////////////////////////////////////////////////////
         /// <summary>
@@ -242,7 +242,7 @@ namespace CrossUI.SFML.System
         /// <param name="x">Scalar value</param>
         /// <returns>v / x</returns>
         ////////////////////////////////////////////////////////////
-        public static Vector2i operator /(Vector2i v, int x) => new Vector2i(v.X / x, v.Y / x);
+        public static Vector2I operator /(Vector2I v, int x) => new Vector2I(v.X / x, v.Y / x);
 
         ////////////////////////////////////////////////////////////
         /// <summary>
@@ -252,7 +252,7 @@ namespace CrossUI.SFML.System
         /// <param name="v2">Second vector</param>
         /// <returns>v1 == v2</returns>
         ////////////////////////////////////////////////////////////
-        public static bool operator ==(Vector2i v1, Vector2i v2) => v1.Equals(v2);
+        public static bool operator ==(Vector2I v1, Vector2I v2) => v1.Equals(v2);
 
         ////////////////////////////////////////////////////////////
         /// <summary>
@@ -262,7 +262,7 @@ namespace CrossUI.SFML.System
         /// <param name="v2">Second vector</param>
         /// <returns>v1 != v2</returns>
         ////////////////////////////////////////////////////////////
-        public static bool operator !=(Vector2i v1, Vector2i v2) => !v1.Equals(v2);
+        public static bool operator !=(Vector2I v1, Vector2I v2) => !v1.Equals(v2);
 
         ////////////////////////////////////////////////////////////
         /// <summary>
@@ -279,7 +279,7 @@ namespace CrossUI.SFML.System
         /// <param name="obj">Object to check</param>
         /// <returns>Object and vector are equal</returns>
         ////////////////////////////////////////////////////////////
-        public override bool Equals(object obj) => ( obj is Vector2i ) && Equals((Vector2i)obj);
+        public override bool Equals(object obj) => ( obj is Vector2I ) && Equals((Vector2I)obj);
 
         ///////////////////////////////////////////////////////////
         /// <summary>
@@ -288,7 +288,7 @@ namespace CrossUI.SFML.System
         /// <param name="other">Vector to check</param>
         /// <returns>Vectors are equal</returns>
         ////////////////////////////////////////////////////////////
-        public bool Equals(Vector2i other) => ( X == other.X ) && ( Y == other.Y );
+        public bool Equals(Vector2I other) => ( X == other.X ) && ( Y == other.Y );
 
         ////////////////////////////////////////////////////////////
         /// <summary>
@@ -305,7 +305,7 @@ namespace CrossUI.SFML.System
         /// <param name="v">Vector being casted</param>
         /// <returns>Casting result</returns>
         ////////////////////////////////////////////////////////////
-        public static explicit operator Vector2f(Vector2i v) => new Vector2f(v.X, v.Y);
+        public static explicit operator Vector2F(Vector2I v) => new Vector2F(v.X, v.Y);
 
         ////////////////////////////////////////////////////////////
         /// <summary>
@@ -314,7 +314,7 @@ namespace CrossUI.SFML.System
         /// <param name="v">Vector being casted</param>
         /// <returns>Casting result</returns>
         ////////////////////////////////////////////////////////////
-        public static explicit operator Vector2u(Vector2i v) => new Vector2u((uint)v.X, (uint)v.Y);
+        public static explicit operator Vector2U(Vector2I v) => new Vector2U((uint)v.X, (uint)v.Y);
 
         /// <summary>X (horizontal) component of the vector</summary>
         public int X;
@@ -330,7 +330,7 @@ namespace CrossUI.SFML.System
     /// </summary>
     ////////////////////////////////////////////////////////////
     [StructLayout(LayoutKind.Sequential)]
-    public struct Vector2u : IEquatable<Vector2u>
+    public struct Vector2U : IEquatable<Vector2U>
     {
         ////////////////////////////////////////////////////////////
         /// <summary>
@@ -339,7 +339,7 @@ namespace CrossUI.SFML.System
         /// <param name="x">X coordinate</param>
         /// <param name="y">Y coordinate</param>
         ////////////////////////////////////////////////////////////
-        public Vector2u(uint x, uint y)
+        public Vector2U(uint x, uint y)
         {
             X = x;
             Y = y;
@@ -353,7 +353,7 @@ namespace CrossUI.SFML.System
         /// <param name="v2">Second vector</param>
         /// <returns>v1 - v2</returns>
         ////////////////////////////////////////////////////////////
-        public static Vector2u operator -(Vector2u v1, Vector2u v2) => new Vector2u(v1.X - v2.X, v1.Y - v2.Y);
+        public static Vector2U operator -(Vector2U v1, Vector2U v2) => new Vector2U(v1.X - v2.X, v1.Y - v2.Y);
 
         ////////////////////////////////////////////////////////////
         /// <summary>
@@ -363,7 +363,7 @@ namespace CrossUI.SFML.System
         /// <param name="v2">Second vector</param>
         /// <returns>v1 + v2</returns>
         ////////////////////////////////////////////////////////////
-        public static Vector2u operator +(Vector2u v1, Vector2u v2) => new Vector2u(v1.X + v2.X, v1.Y + v2.Y);
+        public static Vector2U operator +(Vector2U v1, Vector2U v2) => new Vector2U(v1.X + v2.X, v1.Y + v2.Y);
 
         ////////////////////////////////////////////////////////////
         /// <summary>
@@ -373,7 +373,7 @@ namespace CrossUI.SFML.System
         /// <param name="x">Scalar value</param>
         /// <returns>v * x</returns>
         ////////////////////////////////////////////////////////////
-        public static Vector2u operator *(Vector2u v, uint x) => new Vector2u(v.X * x, v.Y * x);
+        public static Vector2U operator *(Vector2U v, uint x) => new Vector2U(v.X * x, v.Y * x);
 
         ////////////////////////////////////////////////////////////
         /// <summary>
@@ -383,7 +383,7 @@ namespace CrossUI.SFML.System
         /// <param name="v">Vector</param>
         /// <returns>x * v</returns>
         ////////////////////////////////////////////////////////////
-        public static Vector2u operator *(uint x, Vector2u v) => new Vector2u(v.X * x, v.Y * x);
+        public static Vector2U operator *(uint x, Vector2U v) => new Vector2U(v.X * x, v.Y * x);
 
         ////////////////////////////////////////////////////////////
         /// <summary>
@@ -393,7 +393,7 @@ namespace CrossUI.SFML.System
         /// <param name="x">Scalar value</param>
         /// <returns>v / x</returns>
         ////////////////////////////////////////////////////////////
-        public static Vector2u operator /(Vector2u v, uint x) => new Vector2u(v.X / x, v.Y / x);
+        public static Vector2U operator /(Vector2U v, uint x) => new Vector2U(v.X / x, v.Y / x);
 
         ////////////////////////////////////////////////////////////
         /// <summary>
@@ -403,7 +403,7 @@ namespace CrossUI.SFML.System
         /// <param name="v2">Second vector</param>
         /// <returns>v1 == v2</returns>
         ////////////////////////////////////////////////////////////
-        public static bool operator ==(Vector2u v1, Vector2u v2) => v1.Equals(v2);
+        public static bool operator ==(Vector2U v1, Vector2U v2) => v1.Equals(v2);
 
         ////////////////////////////////////////////////////////////
         /// <summary>
@@ -413,7 +413,7 @@ namespace CrossUI.SFML.System
         /// <param name="v2">Second vector</param>
         /// <returns>v1 != v2</returns>
         ////////////////////////////////////////////////////////////
-        public static bool operator !=(Vector2u v1, Vector2u v2) => !v1.Equals(v2);
+        public static bool operator !=(Vector2U v1, Vector2U v2) => !v1.Equals(v2);
 
         ////////////////////////////////////////////////////////////
         /// <summary>
@@ -430,7 +430,7 @@ namespace CrossUI.SFML.System
         /// <param name="obj">Object to check</param>
         /// <returns>Object and vector are equal</returns>
         ////////////////////////////////////////////////////////////
-        public override bool Equals(object obj) => ( obj is Vector2u ) && Equals((Vector2u)obj);
+        public override bool Equals(object obj) => ( obj is Vector2U ) && Equals((Vector2U)obj);
 
         ///////////////////////////////////////////////////////////
         /// <summary>
@@ -439,7 +439,7 @@ namespace CrossUI.SFML.System
         /// <param name="other">Vector to check</param>
         /// <returns>Vectors are equal</returns>
         ////////////////////////////////////////////////////////////
-        public bool Equals(Vector2u other) => ( X == other.X ) && ( Y == other.Y );
+        public bool Equals(Vector2U other) => ( X == other.X ) && ( Y == other.Y );
 
         ////////////////////////////////////////////////////////////
         /// <summary>
@@ -456,7 +456,7 @@ namespace CrossUI.SFML.System
         /// <param name="v">Vector being casted</param>
         /// <returns>Casting result</returns>
         ////////////////////////////////////////////////////////////
-        public static explicit operator Vector2i(Vector2u v) => new Vector2i((int)v.X, (int)v.Y);
+        public static explicit operator Vector2I(Vector2U v) => new Vector2I((int)v.X, (int)v.Y);
 
         ////////////////////////////////////////////////////////////
         /// <summary>
@@ -465,7 +465,7 @@ namespace CrossUI.SFML.System
         /// <param name="v">Vector being casted</param>
         /// <returns>Casting result</returns>
         ////////////////////////////////////////////////////////////
-        public static explicit operator Vector2f(Vector2u v) => new Vector2f(v.X, v.Y);
+        public static explicit operator Vector2F(Vector2U v) => new Vector2F(v.X, v.Y);
 
         /// <summary>X (horizontal) component of the vector</summary>
         public uint X;

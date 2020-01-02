@@ -61,12 +61,12 @@ namespace CrossUI.SFML.Window
         {
             get
             {
-                if (ourGlobalContext == null)
+                if (_ourGlobalContext == null)
                 {
-                    ourGlobalContext = new Context();
+                    _ourGlobalContext = new Context();
                 }
 
-                return ourGlobalContext;
+                return _ourGlobalContext;
             }
         }
 
@@ -81,22 +81,22 @@ namespace CrossUI.SFML.Window
             return "[Context]";
         }
 
-        private static Context ourGlobalContext = null;
+        private static Context _ourGlobalContext = null;
 
         private readonly IntPtr myThis = IntPtr.Zero;
 
         #region Imports
-        [DllImport(CSFML.window, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
-        static extern IntPtr sfContext_create();
+        [DllImport(Csfml.Window, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
+        private static extern IntPtr sfContext_create();
 
-        [DllImport(CSFML.window, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
-        static extern void sfContext_destroy(IntPtr View);
+        [DllImport(Csfml.Window, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
+        private static extern void sfContext_destroy(IntPtr view);
 
-        [DllImport(CSFML.window, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
-        static extern bool sfContext_setActive(IntPtr View, bool Active);
+        [DllImport(Csfml.Window, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
+        private static extern bool sfContext_setActive(IntPtr view, bool active);
 
-        [DllImport(CSFML.window, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
-        static extern ContextSettings sfContext_getSettings(IntPtr View);
+        [DllImport(Csfml.Window, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
+        private static extern ContextSettings sfContext_getSettings(IntPtr view);
         #endregion
     }
 }

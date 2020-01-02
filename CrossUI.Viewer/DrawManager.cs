@@ -1,6 +1,5 @@
 ﻿using System;
 using CrossUI.SFML.Graphics;
-using SFML.Graphics;
 
 namespace CrossUI.Viewer
 {

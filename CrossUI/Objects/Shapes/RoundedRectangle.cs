@@ -1,15 +1,14 @@
 ﻿using System;
 using CrossUI.SFML.Graphics;
 using CrossUI.SFML.System;
-using SFML.Graphics;
 
 namespace CrossUI.Objects.Shapes
 {
     public class RoundedRectangle : Shape
     {
-        private Vector2f size;
+        private Vector2F size;
 
-        public RoundedRectangle(Vector2f size, float radius, uint cornerPointCount = 10)
+        public RoundedRectangle(Vector2F size, float radius, uint cornerPointCount = 10)
         {
             Size = size;
             CornerPointCount = cornerPointCount;
@@ -26,7 +25,7 @@ namespace CrossUI.Objects.Shapes
 
         public uint CornerPointCount { get; set; }
 
-        public Vector2f Size
+        public Vector2F Size
         {
             get => size;
             set
@@ -36,15 +35,15 @@ namespace CrossUI.Objects.Shapes
             }
         }
 
-        public override Vector2f GetPoint(uint index)
+        public override Vector2F GetPoint(uint index)
         {
             if (index >= CornerPointCount * 4)
             {
-                return new Vector2f(0,0);
+                return new Vector2F(0,0);
             }
 
             var deltaAngle = 90.0f/(CornerPointCount-1);
-            var center = new Vector2f(0,0);
+            var center = new Vector2F(0,0);
             var centerIndex = index/CornerPointCount;
             
             switch(centerIndex)
@@ -70,7 +69,7 @@ namespace CrossUI.Objects.Shapes
             var x = Radius*MathF.Cos(deltaAngle*(index-centerIndex)*MathF.PI/180)+center.X;
             var y = -Radius*MathF.Sin(deltaAngle*(index-centerIndex)*MathF.PI/180)+center.Y;
             
-            var returnPoint = new Vector2f(x, y);
+            var returnPoint = new Vector2F(x, y);
 
             return returnPoint;
         }

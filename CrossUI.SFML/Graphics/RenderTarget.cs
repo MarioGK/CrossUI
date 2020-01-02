@@ -1,5 +1,4 @@
 using CrossUI.SFML.System;
-using SFML.Graphics;
 
 namespace CrossUI.SFML.Graphics
 {
@@ -8,14 +7,14 @@ namespace CrossUI.SFML.Graphics
     /// Abstract base class for render targets (renderwindow, renderimage)
     /// </summary>
     ////////////////////////////////////////////////////////////
-    public interface RenderTarget
+    public interface IRenderTarget
     {
         ////////////////////////////////////////////////////////////
         /// <summary>
         /// Size of the rendering region of the target
         /// </summary>
         ////////////////////////////////////////////////////////////
-        Vector2u Size { get; }
+        Vector2U Size { get; }
 
         ////////////////////////////////////////////////////////////
         /// <summary>
@@ -62,7 +61,7 @@ namespace CrossUI.SFML.Graphics
         /// <param name="point">Pixel to convert</param>
         /// <returns>The converted point, in "world" coordinates</returns>
         ////////////////////////////////////////////////////////////
-        Vector2f MapPixelToCoords(Vector2i point);
+        Vector2F MapPixelToCoords(Vector2I point);
 
         ////////////////////////////////////////////////////////////
         /// <summary>
@@ -90,7 +89,7 @@ namespace CrossUI.SFML.Graphics
         /// <param name="view">The view to use for converting the point</param>
         /// <returns>The converted point, in "world" coordinates</returns>
         ////////////////////////////////////////////////////////////
-        Vector2f MapPixelToCoords(Vector2i point, View view);
+        Vector2F MapPixelToCoords(Vector2I point, View view);
 
         ////////////////////////////////////////////////////////////
         /// <summary>
@@ -105,7 +104,7 @@ namespace CrossUI.SFML.Graphics
         /// <param name="point">Point to convert</param>
         /// <returns>The converted point, in target coordinates (pixels)</returns>
         ////////////////////////////////////////////////////////////
-        Vector2i MapCoordsToPixel(Vector2f point);
+        Vector2I MapCoordsToPixel(Vector2F point);
 
         ////////////////////////////////////////////////////////////
         /// <summary>
@@ -129,7 +128,7 @@ namespace CrossUI.SFML.Graphics
         /// <param name="view">The view to use for converting the point</param>
         /// <returns>The converted point, in target coordinates (pixels)</returns>
         ////////////////////////////////////////////////////////////
-        Vector2i MapCoordsToPixel(Vector2f point, View view);
+        Vector2I MapCoordsToPixel(Vector2F point, View view);
 
         ////////////////////////////////////////////////////////////
         /// <summary>
@@ -235,7 +234,7 @@ namespace CrossUI.SFML.Graphics
         /// function if you do so.
         /// </summary>
         ////////////////////////////////////////////////////////////
-        void PushGLStates();
+        void PushGlStates();
 
         ////////////////////////////////////////////////////////////
         /// <summary>
@@ -245,7 +244,7 @@ namespace CrossUI.SFML.Graphics
         /// description of these functions.
         /// </summary>
         ////////////////////////////////////////////////////////////
-        void PopGLStates();
+        void PopGlStates();
 
         ////////////////////////////////////////////////////////////
         /// <summary>
@@ -268,6 +267,6 @@ namespace CrossUI.SFML.Graphics
         /// // OpenGL code here...
         /// </summary>
         ////////////////////////////////////////////////////////////
-        void ResetGLStates();
+        void ResetGlStates();
     }
 }

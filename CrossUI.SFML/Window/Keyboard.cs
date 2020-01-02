@@ -270,11 +270,11 @@ namespace CrossUI.SFML.Window
         }
 
         #region Imports
-        [DllImport(CSFML.window, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
-        static extern bool sfKeyboard_isKeyPressed(Key Key);
+        [DllImport(Csfml.Window, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
+        private static extern bool sfKeyboard_isKeyPressed(Key key);
 
-        [DllImport(CSFML.window, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
-        static extern void sfKeyboard_setVirtualKeyboardVisible(bool visible);
+        [DllImport(Csfml.Window, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
+        private static extern void sfKeyboard_setVirtualKeyboardVisible(bool visible);
         #endregion
     }
 }

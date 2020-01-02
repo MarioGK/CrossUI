@@ -63,9 +63,9 @@ namespace CrossUI.SFML.Graphics
         /// <param name="y">Y coordinate of the point to transform</param>
         /// <returns>Transformed point</returns>
         ////////////////////////////////////////////////////////////
-        public Vector2f TransformPoint(float x, float y)
+        public Vector2F TransformPoint(float x, float y)
         {
-            return TransformPoint(new Vector2f(x, y));
+            return TransformPoint(new Vector2F(x, y));
         }
 
         ////////////////////////////////////////////////////////////
@@ -75,7 +75,7 @@ namespace CrossUI.SFML.Graphics
         /// <param name="point">Point to transform</param>
         /// <returns>Transformed point</returns>
         ////////////////////////////////////////////////////////////
-        public Vector2f TransformPoint(Vector2f point)
+        public Vector2F TransformPoint(Vector2F point)
         {
             return sfTransform_transformPoint(ref this, point);
         }
@@ -131,7 +131,7 @@ namespace CrossUI.SFML.Graphics
         /// </summary>
         /// <param name="offset">Translation offset to apply</param>
         ////////////////////////////////////////////////////////////
-        public void Translate(Vector2f offset)
+        public void Translate(Vector2F offset)
         {
             Translate(offset.X, offset.Y);
         }
@@ -177,7 +177,7 @@ namespace CrossUI.SFML.Graphics
         /// <param name="angle">Rotation angle, in degrees</param>
         /// <param name="center">Center of rotation</param>
         ////////////////////////////////////////////////////////////
-        public void Rotate(float angle, Vector2f center)
+        public void Rotate(float angle, Vector2F center)
         {
             Rotate(angle, center.X, center.Y);
         }
@@ -219,7 +219,7 @@ namespace CrossUI.SFML.Graphics
         /// </summary>
         /// <param name="factors">Scaling factors</param>
         ////////////////////////////////////////////////////////////
-        public void Scale(Vector2f factors)
+        public void Scale(Vector2F factors)
         {
             Scale(factors.X, factors.Y);
         }
@@ -236,7 +236,7 @@ namespace CrossUI.SFML.Graphics
         /// <param name="factors">Scaling factors</param>
         /// <param name="center">Center of scaling</param>
         ////////////////////////////////////////////////////////////
-        public void Scale(Vector2f factors, Vector2f center)
+        public void Scale(Vector2F factors, Vector2F center)
         {
             Scale(factors.X, factors.Y, center.X, center.Y);
         }
@@ -303,7 +303,7 @@ namespace CrossUI.SFML.Graphics
         /// <param name="right">Right operand (the point to transform)</param>
         /// <returns>New transformed point</returns>
         ////////////////////////////////////////////////////////////
-        public static Vector2f operator *(Transform left, Vector2f right)
+        public static Vector2F operator *(Transform left, Vector2F right)
         {
             return left.TransformPoint(right);
         }
@@ -339,35 +339,35 @@ namespace CrossUI.SFML.Graphics
         internal float m20, m21, m22;
 
         #region Imports
-        [DllImport(CSFML.graphics, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
-        static extern Transform sfTransform_getInverse(ref Transform transform);
+        [DllImport(Csfml.Graphics, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
+        private static extern Transform sfTransform_getInverse(ref Transform transform);
 
-        [DllImport(CSFML.graphics, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
-        static extern Vector2f sfTransform_transformPoint(ref Transform transform, Vector2f point);
+        [DllImport(Csfml.Graphics, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
+        private static extern Vector2F sfTransform_transformPoint(ref Transform transform, Vector2F point);
 
-        [DllImport(CSFML.graphics, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
-        static extern FloatRect sfTransform_transformRect(ref Transform transform, FloatRect rectangle);
+        [DllImport(Csfml.Graphics, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
+        private static extern FloatRect sfTransform_transformRect(ref Transform transform, FloatRect rectangle);
 
-        [DllImport(CSFML.graphics, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
-        static extern void sfTransform_combine(ref Transform transform, ref Transform other);
+        [DllImport(Csfml.Graphics, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
+        private static extern void sfTransform_combine(ref Transform transform, ref Transform other);
 
-        [DllImport(CSFML.graphics, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
-        static extern void sfTransform_translate(ref Transform transform, float x, float y);
+        [DllImport(Csfml.Graphics, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
+        private static extern void sfTransform_translate(ref Transform transform, float x, float y);
 
-        [DllImport(CSFML.graphics, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
-        static extern void sfTransform_rotate(ref Transform transform, float angle);
+        [DllImport(Csfml.Graphics, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
+        private static extern void sfTransform_rotate(ref Transform transform, float angle);
 
-        [DllImport(CSFML.graphics, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
-        static extern void sfTransform_rotateWithCenter(ref Transform transform, float angle, float centerX, float centerY);
+        [DllImport(Csfml.Graphics, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
+        private static extern void sfTransform_rotateWithCenter(ref Transform transform, float angle, float centerX, float centerY);
 
-        [DllImport(CSFML.graphics, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
-        static extern void sfTransform_scale(ref Transform transform, float scaleX, float scaleY);
+        [DllImport(Csfml.Graphics, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
+        private static extern void sfTransform_scale(ref Transform transform, float scaleX, float scaleY);
 
-        [DllImport(CSFML.graphics, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
-        static extern void sfTransform_scaleWithCenter(ref Transform transform, float scaleX, float scaleY, float centerX, float centerY);
+        [DllImport(Csfml.Graphics, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
+        private static extern void sfTransform_scaleWithCenter(ref Transform transform, float scaleX, float scaleY, float centerX, float centerY);
 
-        [DllImport(CSFML.graphics, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
-        static extern bool sfTransform_equal(ref Transform left, ref Transform right);
+        [DllImport(Csfml.Graphics, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
+        private static extern bool sfTransform_equal(ref Transform left, ref Transform right);
         #endregion
     }
 }

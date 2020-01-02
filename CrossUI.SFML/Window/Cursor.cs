@@ -147,7 +147,7 @@ namespace CrossUI.SFML.Window
         /// <param name="pixels">Array of pixels of the image</param>
         /// <param name="size">Width and height of the image</param>
         /// <param name="hotspot">(x,y) location of the hotspot</param>
-        public Cursor(byte[] pixels, SFML.System.Vector2u size, SFML.System.Vector2u hotspot)
+        public Cursor(byte[] pixels, SFML.System.Vector2U size, SFML.System.Vector2U hotspot)
             : base((IntPtr)0)
         {
             unsafe
@@ -170,13 +170,13 @@ namespace CrossUI.SFML.Window
             sfCursor_destroy(CPointer);
         }
 
-        [DllImport(CSFML.window, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
-        static extern IntPtr sfCursor_createFromSystem(CursorType type);
+        [DllImport(Csfml.Window, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
+        private static extern IntPtr sfCursor_createFromSystem(CursorType type);
 
-        [DllImport(CSFML.window, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
-        static extern IntPtr sfCursor_createFromPixels(IntPtr pixels, Vector2u size, Vector2u hotspot);
+        [DllImport(Csfml.Window, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
+        private static extern IntPtr sfCursor_createFromPixels(IntPtr pixels, Vector2U size, Vector2U hotspot);
 
-        [DllImport(CSFML.window, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
-        static extern void sfCursor_destroy(IntPtr CPointer);
+        [DllImport(Csfml.Window, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
+        private static extern void sfCursor_destroy(IntPtr cPointer);
     }
 }

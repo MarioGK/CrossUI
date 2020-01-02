@@ -17,6 +17,6 @@ namespace CrossUI.SFML.Graphics
         /// <param name="target">Render target to draw to</param>
         /// <param name="states">Current render states</param>
         ////////////////////////////////////////////////////////////
-        void Draw(RenderTarget target, RenderStates states);
+        void Draw(IRenderTarget target, RenderStates states);
     }
 }

@@ -1,7 +1,7 @@
 using System;
 using System.Runtime.InteropServices;
 
-namespace SFML.Graphics
+namespace CrossUI.SFML.Graphics
 {
     ////////////////////////////////////////////////////////////
     /// <summary>

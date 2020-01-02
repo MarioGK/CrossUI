@@ -1,7 +1,7 @@
 using System;
 using System.Runtime.Serialization;
 
-namespace CrossUI.SFML.Window
+namespace CrossUI.SFML.Exceptions
 {
     ////////////////////////////////////////////////////////////
     /// <summary>
@@ -74,7 +74,7 @@ namespace CrossUI.SFML.Window
         /// Initialize an instance of the exception with serialized data
         /// </summary>
         /// <param name="info">Serialized data</param>
-        /// <param name="context">Contextual informations</param>
+        /// <param name="context">Contextual information</param>
         ////////////////////////////////////////////////////////////
         public LoadingFailedException(SerializationInfo info, StreamingContext context) :
             base(info, context)

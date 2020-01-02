@@ -2,7 +2,6 @@ using System;
 using System.Runtime.InteropServices;
 using System.Security;
 using CrossUI.SFML.System;
-using SFML.Graphics;
 
 namespace CrossUI.SFML.Graphics
 {
@@ -88,7 +87,7 @@ namespace CrossUI.SFML.Graphics
         /// <param name="index">Index of the point to get, in range [0 .. PointCount - 1]</param>
         /// <returns>index-th point of the shape</returns>
         ////////////////////////////////////////////////////////////
-        public abstract Vector2f GetPoint(uint index);
+        public abstract Vector2F GetPoint(uint index);
 
         ////////////////////////////////////////////////////////////
         /// <summary>
@@ -133,7 +132,7 @@ namespace CrossUI.SFML.Graphics
         /// <param name="target">Render target to draw to</param>
         /// <param name="states">Current render states</param>
         ////////////////////////////////////////////////////////////
-        public void Draw(RenderTarget target, RenderStates states)
+        public void Draw(IRenderTarget target, RenderStates states)
         {
             states.Transform *= Transform;
             var marshaledStates = states.Marshal();
@@ -226,16 +225,16 @@ namespace CrossUI.SFML.Graphics
         /// Callback passed to the C API
         /// </summary>
         ////////////////////////////////////////////////////////////
-        private Vector2f InternalGetPoint(uint index, IntPtr userData)
+        private Vector2F InternalGetPoint(uint index, IntPtr userData)
         {
             return GetPoint(index);
         }
 
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        private delegate uint GetPointCountCallbackType(IntPtr UserData);
+        private delegate uint GetPointCountCallbackType(IntPtr userData);
 
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        private delegate Vector2f GetPointCallbackType(uint index, IntPtr UserData);
+        private delegate Vector2F GetPointCallbackType(uint index, IntPtr userData);
 
         private readonly GetPointCountCallbackType myGetPointCountCallback;
         private readonly GetPointCallbackType myGetPointCallback;
@@ -243,53 +242,53 @@ namespace CrossUI.SFML.Graphics
         private Texture myTexture = null;
 
         #region Imports
-        [DllImport(CSFML.graphics, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
-        static extern IntPtr sfShape_create(GetPointCountCallbackType getPointCount, GetPointCallbackType getPoint, IntPtr userData);
+        [DllImport(Csfml.Graphics, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
+        private static extern IntPtr sfShape_create(GetPointCountCallbackType getPointCount, GetPointCallbackType getPoint, IntPtr userData);
 
-        [DllImport(CSFML.graphics, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
-        static extern IntPtr sfShape_copy(IntPtr Shape);
+        [DllImport(Csfml.Graphics, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
+        private static extern IntPtr sfShape_copy(IntPtr shape);
 
-        [DllImport(CSFML.graphics, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
-        static extern void sfShape_destroy(IntPtr CPointer);
+        [DllImport(Csfml.Graphics, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
+        private static extern void sfShape_destroy(IntPtr cPointer);
 
-        [DllImport(CSFML.graphics, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
-        static extern void sfShape_setTexture(IntPtr CPointer, IntPtr Texture, bool AdjustToNewSize);
+        [DllImport(Csfml.Graphics, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
+        private static extern void sfShape_setTexture(IntPtr cPointer, IntPtr texture, bool adjustToNewSize);
 
-        [DllImport(CSFML.graphics, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
-        static extern void sfShape_setTextureRect(IntPtr CPointer, IntRect Rect);
+        [DllImport(Csfml.Graphics, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
+        private static extern void sfShape_setTextureRect(IntPtr cPointer, IntRect rect);
 
-        [DllImport(CSFML.graphics, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
-        static extern IntRect sfShape_getTextureRect(IntPtr CPointer);
+        [DllImport(Csfml.Graphics, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
+        private static extern IntRect sfShape_getTextureRect(IntPtr cPointer);
 
-        [DllImport(CSFML.graphics, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
-        static extern void sfShape_setFillColor(IntPtr CPointer, Color Color);
+        [DllImport(Csfml.Graphics, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
+        private static extern void sfShape_setFillColor(IntPtr cPointer, Color color);
 
-        [DllImport(CSFML.graphics, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
-        static extern Color sfShape_getFillColor(IntPtr CPointer);
+        [DllImport(Csfml.Graphics, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
+        private static extern Color sfShape_getFillColor(IntPtr cPointer);
 
-        [DllImport(CSFML.graphics, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
-        static extern void sfShape_setOutlineColor(IntPtr CPointer, Color Color);
+        [DllImport(Csfml.Graphics, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
+        private static extern void sfShape_setOutlineColor(IntPtr cPointer, Color color);
 
-        [DllImport(CSFML.graphics, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
-        static extern Color sfShape_getOutlineColor(IntPtr CPointer);
+        [DllImport(Csfml.Graphics, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
+        private static extern Color sfShape_getOutlineColor(IntPtr cPointer);
 
-        [DllImport(CSFML.graphics, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
-        static extern void sfShape_setOutlineThickness(IntPtr CPointer, float Thickness);
+        [DllImport(Csfml.Graphics, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
+        private static extern void sfShape_setOutlineThickness(IntPtr cPointer, float thickness);
 
-        [DllImport(CSFML.graphics, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
-        static extern float sfShape_getOutlineThickness(IntPtr CPointer);
+        [DllImport(Csfml.Graphics, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
+        private static extern float sfShape_getOutlineThickness(IntPtr cPointer);
 
-        [DllImport(CSFML.graphics, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
-        static extern FloatRect sfShape_getLocalBounds(IntPtr CPointer);
+        [DllImport(Csfml.Graphics, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
+        private static extern FloatRect sfShape_getLocalBounds(IntPtr cPointer);
 
-        [DllImport(CSFML.graphics, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
-        static extern void sfShape_update(IntPtr CPointer);
+        [DllImport(Csfml.Graphics, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
+        private static extern void sfShape_update(IntPtr cPointer);
 
-        [DllImport(CSFML.graphics, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
-        static extern void sfRenderWindow_drawShape(IntPtr CPointer, IntPtr Shape, ref RenderStates.MarshalData states);
+        [DllImport(Csfml.Graphics, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
+        private static extern void sfRenderWindow_drawShape(IntPtr cPointer, IntPtr shape, ref RenderStates.MarshalData states);
 
-        [DllImport(CSFML.graphics, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
-        static extern void sfRenderTexture_drawShape(IntPtr CPointer, IntPtr Shape, ref RenderStates.MarshalData states);
+        [DllImport(Csfml.Graphics, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
+        private static extern void sfRenderTexture_drawShape(IntPtr cPointer, IntPtr shape, ref RenderStates.MarshalData states);
         #endregion
     }
 }

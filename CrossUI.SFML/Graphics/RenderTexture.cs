@@ -3,7 +3,6 @@ using System.Runtime.InteropServices;
 using System.Security;
 using CrossUI.SFML.System;
 using CrossUI.SFML.Window;
-using SFML.Graphics;
 
 namespace CrossUI.SFML.Graphics
 {
@@ -12,7 +11,7 @@ namespace CrossUI.SFML.Graphics
     /// Target for off-screen 2D rendering into an texture
     /// </summary>
     ////////////////////////////////////////////////////////////
-    public class RenderTexture : ObjectBase, RenderTarget
+    public class RenderTexture : ObjectBase, IRenderTarget
     {
         ////////////////////////////////////////////////////////////
         /// <summary>
@@ -97,7 +96,7 @@ namespace CrossUI.SFML.Graphics
         /// Size of the rendering region of the render texture
         /// </summary>
         ////////////////////////////////////////////////////////////
-        public Vector2u Size => sfRenderTexture_getSize(CPointer);
+        public Vector2U Size => sfRenderTexture_getSize(CPointer);
 
         ////////////////////////////////////////////////////////////
         /// <summary>
@@ -153,7 +152,7 @@ namespace CrossUI.SFML.Graphics
         /// <param name="point">Pixel to convert</param>
         /// <returns>The converted point, in "world" coordinates</returns>
         ////////////////////////////////////////////////////////////
-        public Vector2f MapPixelToCoords(Vector2i point)
+        public Vector2F MapPixelToCoords(Vector2I point)
         {
             return MapPixelToCoords(point, GetView());
         }
@@ -184,7 +183,7 @@ namespace CrossUI.SFML.Graphics
         /// <param name="view">The view to use for converting the point</param>
         /// <returns>The converted point, in "world" coordinates</returns>
         ////////////////////////////////////////////////////////////
-        public Vector2f MapPixelToCoords(Vector2i point, View view)
+        public Vector2F MapPixelToCoords(Vector2I point, View view)
         {
             return sfRenderTexture_mapPixelToCoords(CPointer, point, view != null ? view.CPointer : IntPtr.Zero);
         }
@@ -202,7 +201,7 @@ namespace CrossUI.SFML.Graphics
         /// <param name="point">Point to convert</param>
         /// <returns>The converted point, in target coordinates (pixels)</returns>
         ////////////////////////////////////////////////////////////
-        public Vector2i MapCoordsToPixel(Vector2f point)
+        public Vector2I MapCoordsToPixel(Vector2F point)
         {
             return MapCoordsToPixel(point, GetView());
         }
@@ -229,7 +228,7 @@ namespace CrossUI.SFML.Graphics
         /// <param name="view">The view to use for converting the point</param>
         /// <returns>The converted point, in target coordinates (pixels)</returns>
         ////////////////////////////////////////////////////////////
-        public Vector2i MapCoordsToPixel(Vector2f point, View view)
+        public Vector2I MapCoordsToPixel(Vector2F point, View view)
         {
             return sfRenderTexture_mapCoordsToPixel(CPointer, point, view != null ? view.CPointer : IntPtr.Zero);
         }
@@ -427,7 +426,7 @@ namespace CrossUI.SFML.Graphics
         /// function if you do so.
         /// </summary>
         ////////////////////////////////////////////////////////////
-        public void PushGLStates()
+        public void PushGlStates()
         {
             sfRenderTexture_pushGLStates(CPointer);
         }
@@ -440,7 +439,7 @@ namespace CrossUI.SFML.Graphics
         /// description of these functions.
         /// </summary>
         ////////////////////////////////////////////////////////////
-        public void PopGLStates()
+        public void PopGlStates()
         {
             sfRenderTexture_popGLStates(CPointer);
         }
@@ -466,7 +465,7 @@ namespace CrossUI.SFML.Graphics
         /// // OpenGL code here...
         /// </summary>
         ////////////////////////////////////////////////////////////
-        public void ResetGLStates()
+        public void ResetGlStates()
         {
             sfRenderTexture_resetGLStates(CPointer);
         }
@@ -518,83 +517,83 @@ namespace CrossUI.SFML.Graphics
 
         #region Imports
         [Obsolete("sfRenderTexture_create is obselete. Use sfRenderTexture_createWithSettings instead.")]
-        [DllImport(CSFML.graphics, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
-        static extern IntPtr sfRenderTexture_create(uint Width, uint Height, bool DepthBuffer);
+        [DllImport(Csfml.Graphics, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
+        private static extern IntPtr sfRenderTexture_create(uint width, uint height, bool depthBuffer);
 
-        [DllImport(CSFML.graphics, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
-        static extern IntPtr sfRenderTexture_createWithSettings(uint Width, uint Height, ref ContextSettings Settings);
+        [DllImport(Csfml.Graphics, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
+        private static extern IntPtr sfRenderTexture_createWithSettings(uint width, uint height, ref ContextSettings settings);
 
-        [DllImport(CSFML.graphics, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
-        static extern void sfRenderTexture_destroy(IntPtr CPointer);
+        [DllImport(Csfml.Graphics, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
+        private static extern void sfRenderTexture_destroy(IntPtr cPointer);
 
-        [DllImport(CSFML.graphics, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
-        static extern void sfRenderTexture_clear(IntPtr CPointer, Color ClearColor);
+        [DllImport(Csfml.Graphics, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
+        private static extern void sfRenderTexture_clear(IntPtr cPointer, Color clearColor);
 
-        [DllImport(CSFML.graphics, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
-        static extern Vector2u sfRenderTexture_getSize(IntPtr CPointer);
+        [DllImport(Csfml.Graphics, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
+        private static extern Vector2U sfRenderTexture_getSize(IntPtr cPointer);
 
-        [DllImport(CSFML.graphics, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
-        static extern bool sfRenderTexture_setActive(IntPtr CPointer, bool Active);
+        [DllImport(Csfml.Graphics, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
+        private static extern bool sfRenderTexture_setActive(IntPtr cPointer, bool active);
 
-        [DllImport(CSFML.graphics, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
-        static extern bool sfRenderTexture_saveGLStates(IntPtr CPointer);
+        [DllImport(Csfml.Graphics, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
+        private static extern bool sfRenderTexture_saveGLStates(IntPtr cPointer);
 
-        [DllImport(CSFML.graphics, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
-        static extern bool sfRenderTexture_restoreGLStates(IntPtr CPointer);
+        [DllImport(Csfml.Graphics, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
+        private static extern bool sfRenderTexture_restoreGLStates(IntPtr cPointer);
 
-        [DllImport(CSFML.graphics, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
-        static extern bool sfRenderTexture_display(IntPtr CPointer);
+        [DllImport(Csfml.Graphics, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
+        private static extern bool sfRenderTexture_display(IntPtr cPointer);
 
-        [DllImport(CSFML.graphics, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
-        static extern void sfRenderTexture_setView(IntPtr CPointer, IntPtr View);
+        [DllImport(Csfml.Graphics, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
+        private static extern void sfRenderTexture_setView(IntPtr cPointer, IntPtr view);
 
-        [DllImport(CSFML.graphics, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
-        static extern IntPtr sfRenderTexture_getView(IntPtr CPointer);
+        [DllImport(Csfml.Graphics, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
+        private static extern IntPtr sfRenderTexture_getView(IntPtr cPointer);
 
-        [DllImport(CSFML.graphics, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
-        static extern IntPtr sfRenderTexture_getDefaultView(IntPtr CPointer);
+        [DllImport(Csfml.Graphics, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
+        private static extern IntPtr sfRenderTexture_getDefaultView(IntPtr cPointer);
 
-        [DllImport(CSFML.graphics, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
-        static extern IntRect sfRenderTexture_getViewport(IntPtr CPointer, IntPtr TargetView);
+        [DllImport(Csfml.Graphics, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
+        private static extern IntRect sfRenderTexture_getViewport(IntPtr cPointer, IntPtr targetView);
 
-        [DllImport(CSFML.graphics, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
-        static extern Vector2i sfRenderTexture_mapCoordsToPixel(IntPtr CPointer, Vector2f point, IntPtr View);
+        [DllImport(Csfml.Graphics, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
+        private static extern Vector2I sfRenderTexture_mapCoordsToPixel(IntPtr cPointer, Vector2F point, IntPtr view);
 
-        [DllImport(CSFML.graphics, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
-        static extern Vector2f sfRenderTexture_mapPixelToCoords(IntPtr CPointer, Vector2i point, IntPtr View);
+        [DllImport(Csfml.Graphics, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
+        private static extern Vector2F sfRenderTexture_mapPixelToCoords(IntPtr cPointer, Vector2I point, IntPtr view);
 
-        [DllImport(CSFML.graphics, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
-        static extern IntPtr sfRenderTexture_getTexture(IntPtr CPointer);
+        [DllImport(Csfml.Graphics, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
+        private static extern IntPtr sfRenderTexture_getTexture(IntPtr cPointer);
 
-        [DllImport(CSFML.graphics, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
-        static extern uint sfRenderTexture_getMaximumAntialiasingLevel();
+        [DllImport(Csfml.Graphics, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
+        private static extern uint sfRenderTexture_getMaximumAntialiasingLevel();
 
-        [DllImport(CSFML.graphics, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
-        static extern void sfRenderTexture_setSmooth(IntPtr CPointer, bool smooth);
+        [DllImport(Csfml.Graphics, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
+        private static extern void sfRenderTexture_setSmooth(IntPtr cPointer, bool smooth);
 
-        [DllImport(CSFML.graphics, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
-        static extern bool sfRenderTexture_isSmooth(IntPtr CPointer);
+        [DllImport(Csfml.Graphics, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
+        private static extern bool sfRenderTexture_isSmooth(IntPtr cPointer);
 
-        [DllImport(CSFML.graphics, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
-        static extern void sfRenderTexture_setRepeated(IntPtr CPointer, bool repeated);
+        [DllImport(Csfml.Graphics, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
+        private static extern void sfRenderTexture_setRepeated(IntPtr cPointer, bool repeated);
 
-        [DllImport(CSFML.graphics, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
-        static extern bool sfRenderTexture_isRepeated(IntPtr CPointer);
+        [DllImport(Csfml.Graphics, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
+        private static extern bool sfRenderTexture_isRepeated(IntPtr cPointer);
 
-        [DllImport(CSFML.graphics, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
-        static extern bool sfRenderTexture_generateMipmap(IntPtr CPointer);
+        [DllImport(Csfml.Graphics, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
+        private static extern bool sfRenderTexture_generateMipmap(IntPtr cPointer);
 
-        [DllImport(CSFML.graphics, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
-        unsafe static extern void sfRenderTexture_drawPrimitives(IntPtr CPointer, Vertex* vertexPtr, uint vertexCount, PrimitiveType type, ref RenderStates.MarshalData renderStates);
+        [DllImport(Csfml.Graphics, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
+        private unsafe static extern void sfRenderTexture_drawPrimitives(IntPtr cPointer, Vertex* vertexPtr, uint vertexCount, PrimitiveType type, ref RenderStates.MarshalData renderStates);
 
-        [DllImport(CSFML.graphics, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
-        static extern void sfRenderTexture_pushGLStates(IntPtr CPointer);
+        [DllImport(Csfml.Graphics, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
+        private static extern void sfRenderTexture_pushGLStates(IntPtr cPointer);
 
-        [DllImport(CSFML.graphics, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
-        static extern void sfRenderTexture_popGLStates(IntPtr CPointer);
+        [DllImport(Csfml.Graphics, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
+        private static extern void sfRenderTexture_popGLStates(IntPtr cPointer);
 
-        [DllImport(CSFML.graphics, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
-        static extern void sfRenderTexture_resetGLStates(IntPtr CPointer);
+        [DllImport(Csfml.Graphics, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
+        private static extern void sfRenderTexture_resetGLStates(IntPtr cPointer);
         #endregion
     }
 }

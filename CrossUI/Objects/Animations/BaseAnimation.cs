@@ -14,8 +14,8 @@ namespace CrossUI.Objects.Animations
 
         public BaseUIObject Target { get; set; }
 
-        public Vector2f InitialPosition { get; set; }
-        public Vector2f FinalPosition { get; set; }
+        public Vector2F InitialPosition { get; set; }
+        public Vector2F FinalPosition { get; set; }
 
         public BaseAnimation(BaseUIObject target, float duration)
         {

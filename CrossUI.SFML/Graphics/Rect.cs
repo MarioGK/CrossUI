@@ -37,7 +37,7 @@ namespace CrossUI.SFML.Graphics
         /// <param name="position">Position of the top-left corner of the rectangle</param>
         /// <param name="size">Size of the rectangle</param>
         ////////////////////////////////////////////////////////////
-        public IntRect(Vector2i position, Vector2i size)
+        public IntRect(Vector2I position, Vector2I size)
             : this(position.X, position.Y, size.X, size.Y)
         {
         }
@@ -252,7 +252,7 @@ namespace CrossUI.SFML.Graphics
         /// <param name="position">Position of the top-left corner of the rectangle</param>
         /// <param name="size">Size of the rectangle</param>
         ////////////////////////////////////////////////////////////
-        public FloatRect(Vector2f position, Vector2f size)
+        public FloatRect(Vector2F position, Vector2F size)
             : this(position.X, position.Y, size.X, size.Y)
         {
         }

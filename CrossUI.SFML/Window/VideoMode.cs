@@ -63,15 +63,15 @@ namespace CrossUI.SFML.Window
             {
                 unsafe
                 {
-                    uint Count;
-                    var ModesPtr = sfVideoMode_getFullscreenModes(out Count);
-                    var Modes = new VideoMode[Count];
-                    for (uint i = 0; i < Count; ++i)
+                    uint count;
+                    var modesPtr = sfVideoMode_getFullscreenModes(out count);
+                    var modes = new VideoMode[count];
+                    for (uint i = 0; i < count; ++i)
                     {
-                        Modes[i] = ModesPtr[i];
+                        modes[i] = modesPtr[i];
                     }
 
-                    return Modes;
+                    return modes;
                 }
             }
         }
@@ -107,14 +107,14 @@ namespace CrossUI.SFML.Window
         public uint BitsPerPixel;
 
         #region Imports
-        [DllImport(CSFML.window, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
-        static extern VideoMode sfVideoMode_getDesktopMode();
+        [DllImport(Csfml.Window, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
+        private static extern VideoMode sfVideoMode_getDesktopMode();
 
-        [DllImport(CSFML.window, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
-        unsafe static extern VideoMode* sfVideoMode_getFullscreenModes(out uint Count);
+        [DllImport(Csfml.Window, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
+        private unsafe static extern VideoMode* sfVideoMode_getFullscreenModes(out uint count);
 
-        [DllImport(CSFML.window, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
-        static extern bool sfVideoMode_isValid(VideoMode Mode);
+        [DllImport(Csfml.Window, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
+        private static extern bool sfVideoMode_isValid(VideoMode mode);
         #endregion
     }
 }

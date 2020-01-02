@@ -1,6 +1,6 @@
 ﻿using CrossUI.Objects;
 using CrossUI.Objects.Theme;
-using SFML.Graphics;
+using CrossUI.SFML.Graphics;
 
 namespace CrossUI.Managers
 {

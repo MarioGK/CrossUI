@@ -3,7 +3,6 @@ using CrossUI.Managers;
 using CrossUI.Objects.Shapes;
 using CrossUI.SFML.Graphics;
 using CrossUI.SFML.System;
-using SFML.Graphics;
 
 namespace CrossUI.Objects.UI
 {
@@ -27,12 +26,12 @@ namespace CrossUI.Objects.UI
         private RoundedRectangle backgroundRectangle;
         private Text displayText;
 
-        public Button(string id, Vector2f pos) : base(id, pos)
+        public Button(string id, Vector2F pos) : base(id, pos)
         {
             text = "I am a button";
 
             displayText = new Text(Text, FontManager.CurrentFont) {FillColor = Foreground, Position = Position};
-            backgroundRectangle = new RoundedRectangle(new Vector2f(40, 40), 4f)
+            backgroundRectangle = new RoundedRectangle(new Vector2F(40, 40), 4f)
                 {FillColor = BackgroundColor, Position = Position};
 
             OnHover += OnOnHover;
@@ -110,8 +109,8 @@ namespace CrossUI.Objects.UI
         {
             BackgroundRectangle.Position = Position;
             var textSize = DisplayText.GetLocalBounds();
-            DisplayText.Position = new Vector2f(Position.X + 10f, Position.Y + 10f);
-            BackgroundRectangle.Size = new Vector2f(textSize.Width + 25f, textSize.Height * 2f + 10f);
+            DisplayText.Position = new Vector2F(Position.X + 10f, Position.Y + 10f);
+            BackgroundRectangle.Size = new Vector2F(textSize.Width + 25f, textSize.Height * 2f + 10f);
             DisplayText.FillColor = foreground;
             Rect = BackgroundRectangle.GetGlobalBounds();
             NotifyUIChange();

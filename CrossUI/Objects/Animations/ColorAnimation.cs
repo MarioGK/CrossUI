@@ -1,5 +1,5 @@
 ﻿using CrossUI.Objects.UI;
-using SFML.Graphics;
+using CrossUI.SFML.Graphics;
 
 namespace CrossUI.Objects.Animations
 {

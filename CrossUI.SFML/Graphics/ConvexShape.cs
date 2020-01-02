@@ -76,7 +76,7 @@ namespace CrossUI.SFML.Graphics
         /// <param name="index">Index of the point to get, in range [0 .. PointCount - 1]</param>
         /// <returns>index-th point of the shape</returns>
         ////////////////////////////////////////////////////////////
-        public override Vector2f GetPoint(uint index) => myPoints[index];
+        public override Vector2F GetPoint(uint index) => myPoints[index];
 
         ////////////////////////////////////////////////////////////
         /// <summary>
@@ -91,12 +91,12 @@ namespace CrossUI.SFML.Graphics
         /// <param name="index">Index of the point to change, in range [0 .. PointCount - 1]</param>
         /// <param name="point">New position of the point</param>
         ////////////////////////////////////////////////////////////
-        public void SetPoint(uint index, Vector2f point)
+        public void SetPoint(uint index, Vector2F point)
         {
             myPoints[index] = point;
             Update();
         }
 
-        private Vector2f[] myPoints;
+        private Vector2F[] myPoints;
     }
 }

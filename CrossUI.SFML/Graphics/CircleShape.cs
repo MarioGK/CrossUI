@@ -94,13 +94,13 @@ namespace CrossUI.SFML.Graphics
         /// <param name="index">Index of the point to get, in range [0 .. PointCount - 1]</param>
         /// <returns>index-th point of the shape</returns>
         ////////////////////////////////////////////////////////////
-        public override Vector2f GetPoint(uint index)
+        public override Vector2F GetPoint(uint index)
         {
             var angle = (float)( index * 2 * Math.PI / myPointCount - Math.PI / 2 );
             var x = (float)Math.Cos(angle) * myRadius;
             var y = (float)Math.Sin(angle) * myRadius;
 
-            return new Vector2f(myRadius + x, myRadius + y);
+            return new Vector2F(myRadius + x, myRadius + y);
         }
 
         private float myRadius;

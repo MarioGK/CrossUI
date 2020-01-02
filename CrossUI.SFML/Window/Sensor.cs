@@ -44,47 +44,47 @@ namespace CrossUI.SFML.Window
         /// <summary>
         /// Check if a sensor is available on the underlying platform
         /// </summary>
-        /// <param name="Sensor">Sensor to check</param>
+        /// <param name="sensor">Sensor to check</param>
         /// <returns>True if the sensor is available, false otherwise</returns>
         ////////////////////////////////////////////////////////////
-        public static bool IsAvailable(Type Sensor)
+        public static bool IsAvailable(Type sensor)
         {
-            return sfSensor_isAvailable(Sensor);
+            return sfSensor_isAvailable(sensor);
         }
 
         ////////////////////////////////////////////////////////////
         /// <summary>
         /// Enable or disable a sensor
         /// </summary>
-        /// <param name="Sensor">Sensor to check</param>
-        /// <param name="Enabled">True to enable, false to disable</param>
+        /// <param name="sensor">Sensor to check</param>
+        /// <param name="enabled">True to enable, false to disable</param>
         ////////////////////////////////////////////////////////////
-        public static void SetEnabled(Type Sensor, bool Enabled)
+        public static void SetEnabled(Type sensor, bool enabled)
         {
-            sfSensor_setEnabled(Sensor, Enabled);
+            sfSensor_setEnabled(sensor, enabled);
         }
 
         ////////////////////////////////////////////////////////////
         /// <summary>
         /// Get the current sensor value
         /// </summary>
-        /// <param name="Sensor">Sensor to check</param>
+        /// <param name="sensor">Sensor to check</param>
         /// <returns>The current sensor value</returns>
         ////////////////////////////////////////////////////////////
-        public static Vector3f GetValue(Type Sensor)
+        public static Vector3F GetValue(Type sensor)
         {
-            return sfSensor_getValue(Sensor);
+            return sfSensor_getValue(sensor);
         }
 
         #region Imports
-        [DllImport(CSFML.window, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
-        static extern bool sfSensor_isAvailable(Type Sensor);
+        [DllImport(Csfml.Window, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
+        private static extern bool sfSensor_isAvailable(Type sensor);
 
-        [DllImport(CSFML.window, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
-        static extern void sfSensor_setEnabled(Type Sensor, bool Enabled);
+        [DllImport(Csfml.Window, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
+        private static extern void sfSensor_setEnabled(Type sensor, bool enabled);
 
-        [DllImport(CSFML.window, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
-        static extern Vector3f sfSensor_getValue(Type Sensor);
+        [DllImport(Csfml.Window, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
+        private static extern Vector3F sfSensor_getValue(Type sensor);
         #endregion
     }
 }
