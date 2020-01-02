@@ -1,8 +1,4 @@
-﻿
-
-using System;
-using System.Collections.Generic;
-using CrossUI.Enumerations;
+﻿using CrossUI.Enumerations;
 using CrossUI.SFML.Graphics;
 using CrossUI.SFML.System;
 

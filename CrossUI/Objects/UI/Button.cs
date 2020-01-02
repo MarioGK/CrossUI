@@ -1,5 +1,4 @@
-﻿using System;
-using CrossUI.Managers;
+﻿using CrossUI.Managers;
 using CrossUI.SFML.Graphics;
 using CrossUI.SFML.Graphics.Shapes;
 using CrossUI.SFML.System;

@@ -1,14 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading;
-using CrossUI.Enumerations;
 using CrossUI.Managers;
-using CrossUI.Objects.Animations;
 using CrossUI.Objects.Theme;
 using CrossUI.Objects.UI;
 using CrossUI.SFML.Graphics;
-using CrossUI.SFML.System;
 using CrossUI.SFML.Window;
 
 namespace CrossUI.Objects
@@ -40,18 +36,11 @@ namespace CrossUI.Objects
             ChildrenDictionary.Remove(id);
         }
 
-        public Clock Clock { get; set; }
-
-        //public CrossWindow(string id) : base(id)
         public CrossWindow(string id, bool createWindow = true) : base(id)
         {
-            _Manager.InitializeAllManagers();
-            
             var settings = new ContextSettings{ AntialiasingLevel = 4};
             
             RequiresRenderUpdate = true;
-            
-            Clock = new Clock();
 
             if (!createWindow) return;
             RenderWindow = new RenderWindow(new VideoMode(800, 600), id, Window.Styles.Default, settings);
