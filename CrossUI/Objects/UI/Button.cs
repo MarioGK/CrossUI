@@ -1,7 +1,7 @@
 ﻿using System;
 using CrossUI.Managers;
-using CrossUI.Objects.Shapes;
 using CrossUI.SFML.Graphics;
+using CrossUI.SFML.Graphics.Shapes;
 using CrossUI.SFML.System;
 
 namespace CrossUI.Objects.UI

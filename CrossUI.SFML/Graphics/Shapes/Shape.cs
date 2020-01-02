@@ -3,7 +3,7 @@ using System.Runtime.InteropServices;
 using System.Security;
 using CrossUI.SFML.System;
 
-namespace CrossUI.SFML.Graphics
+namespace CrossUI.SFML.Graphics.Shapes
 {
     ////////////////////////////////////////////////////////////
     /// <summary>

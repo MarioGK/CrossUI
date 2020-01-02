@@ -1,30 +1,40 @@
 using System;
 using CrossUI.SFML.System;
 
-namespace CrossUI.SFML.Graphics
+namespace CrossUI.SFML.Graphics.Shapes
 {
     ////////////////////////////////////////////////////////////
     /// <summary>
-    /// Specialized shape representing a convex polygon
+    /// Specialized shape representing a circle
     /// </summary>
     ////////////////////////////////////////////////////////////
-    public class ConvexShape : Shape
+    public class CircleShape : Shape
     {
         ////////////////////////////////////////////////////////////
         /// <summary>
         /// Default constructor
         /// </summary>
         ////////////////////////////////////////////////////////////
-        public ConvexShape() : this(0) { }
+        public CircleShape() : this(0) { }
 
         ////////////////////////////////////////////////////////////
         /// <summary>
-        /// Construct the shape with an initial point count
+        /// Construct the shape with an initial radius
         /// </summary>
+        /// <param name="radius">Radius of the shape</param>
+        ////////////////////////////////////////////////////////////
+        public CircleShape(float radius) : this(radius, 30) { }
+
+        ////////////////////////////////////////////////////////////
+        /// <summary>
+        /// Construct the shape with an initial radius and point count
+        /// </summary>
+        /// <param name="radius">Radius of the shape</param>
         /// <param name="pointCount">Number of points of the shape</param>
         ////////////////////////////////////////////////////////////
-        public ConvexShape(uint pointCount)
+        public CircleShape(float radius, uint pointCount)
         {
+            Radius = radius;
             SetPointCount(pointCount);
         }
 
@@ -34,33 +44,41 @@ namespace CrossUI.SFML.Graphics
         /// </summary>
         /// <param name="copy">Shape to copy</param>
         ////////////////////////////////////////////////////////////
-        public ConvexShape(ConvexShape copy) : base(copy)
+        public CircleShape(CircleShape copy) : base(copy)
         {
+            Radius = copy.Radius;
             SetPointCount(copy.GetPointCount());
-            for (uint i = 0; i < copy.GetPointCount(); ++i)
-            {
-                SetPoint(i, copy.GetPoint(i));
-            }
         }
 
         ////////////////////////////////////////////////////////////
         /// <summary>
-        /// Get the total number of points of the polygon
+        /// The radius of the shape
         /// </summary>
-        /// <returns>The total point count</returns>
         ////////////////////////////////////////////////////////////
-        public override uint GetPointCount() => (uint)myPoints.Length;
+        public float Radius
+        {
+            get => myRadius;
+            set { myRadius = value; Update(); }
+        }
 
         ////////////////////////////////////////////////////////////
         /// <summary>
-        /// Set the number of points of the polygon.
+        /// Get the total number of points of the circle
+        /// </summary>
+        /// <returns>The total point count</returns>
+        ////////////////////////////////////////////////////////////
+        public override uint GetPointCount() => myPointCount;
+
+        ////////////////////////////////////////////////////////////
+        /// <summary>
+        /// Set the number of points of the circle.
         /// The count must be greater than 2 to define a valid shape.
         /// </summary>
-        /// <param name="count">New number of points of the polygon</param>
+        /// <param name="count">New number of points of the circle</param>
         ////////////////////////////////////////////////////////////
         public void SetPointCount(uint count)
         {
-            Array.Resize(ref myPoints, (int)count);
+            myPointCount = count;
             Update();
         }
 
@@ -76,27 +94,16 @@ namespace CrossUI.SFML.Graphics
         /// <param name="index">Index of the point to get, in range [0 .. PointCount - 1]</param>
         /// <returns>index-th point of the shape</returns>
         ////////////////////////////////////////////////////////////
-        public override Vector2F GetPoint(uint index) => myPoints[index];
-
-        ////////////////////////////////////////////////////////////
-        /// <summary>
-        /// Set the position of a point.
-        ///
-        /// Don't forget that the polygon must remain convex, and
-        /// the points need to stay ordered!
-        /// PointCount must be set first in order to set the total
-        /// number of points. The result is undefined if index is out
-        /// of the valid range.
-        /// </summary>
-        /// <param name="index">Index of the point to change, in range [0 .. PointCount - 1]</param>
-        /// <param name="point">New position of the point</param>
-        ////////////////////////////////////////////////////////////
-        public void SetPoint(uint index, Vector2F point)
+        public override Vector2F GetPoint(uint index)
         {
-            myPoints[index] = point;
-            Update();
+            var angle = (float)( index * 2 * Math.PI / myPointCount - Math.PI / 2 );
+            var x = (float)Math.Cos(angle) * myRadius;
+            var y = (float)Math.Sin(angle) * myRadius;
+
+            return new Vector2F(myRadius + x, myRadius + y);
         }
 
-        private Vector2F[] myPoints;
+        private float myRadius;
+        private uint myPointCount;
     }
 }

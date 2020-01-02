@@ -1,8 +1,7 @@
 ﻿using System;
-using CrossUI.SFML.Graphics;
 using CrossUI.SFML.System;
 
-namespace CrossUI.Objects.Shapes
+namespace CrossUI.SFML.Graphics.Shapes
 {
     public class RoundedLine : Shape
     {
