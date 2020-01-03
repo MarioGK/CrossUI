@@ -83,6 +83,8 @@ namespace CrossUI.Objects
 
         public static WindowTheme Theme => ThemeManager.CurrentThemeConfiguration.WindowTheme;
 
+        public uint RenderedFrames { get; set; }
+
         public void Render(ref RenderWindow renderWindow)
         {
             if (!RequiresRenderUpdate)
@@ -93,7 +95,7 @@ namespace CrossUI.Objects
 
             RequiresRenderUpdate = false;
             
-            Console.WriteLine("rendering...");
+            Console.WriteLine($"Rendering frame {RenderedFrames++}...");
             
             renderWindow.Clear(Theme.Background);
 

@@ -27,7 +27,7 @@ namespace CrossUI.Objects.UI
 
         public Button(string id, Vector2F pos) : base(id, pos)
         {
-            text = "I am a button";
+            text = id;
 
             displayText = new Text(Text, FontManager.CurrentFont) {FillColor = Foreground, Position = Position};
             backgroundRectangle = new RoundedRectangle(new Vector2F(40, 40), 4f)
